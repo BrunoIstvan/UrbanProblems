@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="app_name">Problemas Urbanos</string>
+    <string name="title_splashscreen">Tela Inicial</string>
+    <string name="title_main">Problemas Urbanos</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+    <string name="button_signin">Entrar</string>
+    <string name="button_signup">Cadastrar</string>
+    <string name="nav_myprofile">Meu perfil</string>
+    <string name="nav_about">Sobre o App</string>
+    <string name="nav_logout">Sair</string>
+    <string name="button_go_to_signup">Não tem uma conta? Cadastre-se</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="title_signin">Fazer login</string>
+    <string name="hint_name">Nome completo</string>
+    <string name="hint_confirm_password">Confirmar senha</string>
+    <string name="button_back">Voltar</string>
+    <string name="title_signup">Cadastre-se</string>
+    <string name="dialog_progress_title">Aguarde...</string>
+    <string name="dialog_action_yes">Sim</string>
+    <string name="dialog_action_no">Não</string>
+    <string name="dialog_action_cancel">Cancelar</string>
+    <string name="message_input_email">Informe seu E-mail</string>
+    <string name="message_input_password">Informe sua senha</string>
+    <string name="message_input_name">Informe seu nome completo</string>
+    <string name="message_signup_success">Cadastro realizado com sucesso</string>
+    <string name="message_password_not_confirmed">A confirmação da senha é inválida</string>
+    <string name="nav_problems_location">Localização dos problemas</string>
+    <string name="message_signin_success">Seja bem-vindo</string>
+    <string name="nav_header_desc">Cabeçalho</string>
+    <string name="hint_date_creation">Data de cadastro</string>
+    <string name="option_select_from_gallery">Selecione uma foto da galeria</string>
+    <string name="option_take_a_picture">Tirar foto pela câmera</string>
+    <string name="title_select_action">Selecione uma ação</string>
+    <string name="action_logout">Sair</string>
+    <string name="hint_title">Título</string>
+    <string name="info_upload_image_profile_succeded">Imagem do perfil carregada com sucesso</string>
+    <string name="hint_detail">Detalhe</string>
+    <string name="hint_location">Localização</string>
+    <string name="message_input_title">Informe um título</string>
+    <string name="message_input_detail">Informe detalhes do problema</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Excluir</string>
+    <string name="info_upload_image_problem_succeded">Imagem do problema carregada com sucesso</string>
+    <string name="nav_util_telephones">Telefones úteis</string>
+    <string name="error_sign_in">E-mail/senha não cadastrado ou inválido</string>
+    <string name="error_get_by_id">Ocorreu um erro ao recuperar dados do usuário</string>
+    <string name="error_sign_up">Ocorreu um erro ao cadastrar usuário</string>
+    <string name="error_get_by_email">Ocorreu um erro ao validar email</string>
+    <string name="check_keep_connected">Manter conectado</string>
+    <string name="message_hi_again">Olá! Seja bem-vindo novamente!</string>
+    <string name="message_user_already_exists">E-mail já usado em outro cadastro</string>
+    <string name="message_error_save_data">Erro ao salvar dados do usuário</string>
+
+</resources>

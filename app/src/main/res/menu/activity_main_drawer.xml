@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group  android:id="@+id/group_problems"
+            android:checkableBehavior="all">
+
+        <item   android:id="@+id/menu_maps"
+                android:icon="@drawable/ic_location"
+                android:title="@string/nav_problems_location"/>
+
+        <item   android:id="@+id/menu_utils_telephones"
+                android:icon="@drawable/phone_call"
+                android:title="@string/nav_util_telephones"/>
+
+    </group>
+
+    <group android:id="@+id/group_more"
+           android:checkableBehavior="none">
+
+        <item   android:id="@+id/menu_my_profile"
+                android:icon="@drawable/ic_id"
+                android:title="@string/nav_myprofile"/>
+
+        <item   android:id="@+id/menu_about_app"
+                android:icon="@drawable/ic_about"
+                android:title="@string/nav_about"/>
+
+        <item   android:id="@+id/menu_logout"
+                android:icon="@drawable/ic_exit"
+                android:title="@string/nav_logout"/>
+
+    </group>
+
+
+</menu>
