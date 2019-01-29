@@ -98,7 +98,7 @@ class ViewProblemActivity : AppCompatActivity() {
         } else {
             Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
         }
-        var completeAddress: String = ""
+        var completeAddress: String = "\n"
         if(!problem.address.isNullOrEmpty()) {
             completeAddress += "${getString(R.string.label_address)}: ${problem.address}\n"
         }

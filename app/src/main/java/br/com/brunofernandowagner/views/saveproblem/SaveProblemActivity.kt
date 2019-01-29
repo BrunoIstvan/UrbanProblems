@@ -37,8 +37,13 @@ class SaveProblemActivity : AppCompatActivity() {
     private lateinit var saveProblemViewModel: SaveProblemViewModel
     private lateinit var photoPath: String
     private lateinit var problemLatLong: LatLng
+    private lateinit var address: String
+    private lateinit var addressNumber: String
+    private lateinit var neighborhood: String
+    private lateinit var city: String
+    private lateinit var state: String
+    private lateinit var postalCode: String
 
-    private lateinit var locaionManager: LocationManager
     private lateinit var locationListener: LocationListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,6 +137,14 @@ class SaveProblemActivity : AppCompatActivity() {
         problem.title = edtTitle.editText?.text.toString()
         problem.detail = edtDetail.editText?.text.toString()
         if (::photoPath.isInitialized) problem.photo = photoPath
+        problem.address = address
+        problem.addressNumber = addressNumber
+        problem.neighborhood = neighborhood
+        problem.city = city
+        problem.state = state
+        problem.postalCode = postalCode
+        problem.lat = problemLatLong.latitude
+        problem.lon = problemLatLong.longitude
         saveProblemViewModel.saveProblem(problem)
 
     }
@@ -222,16 +235,10 @@ class SaveProblemActivity : AppCompatActivity() {
                 problemLatLong = LatLng(location?.latitude!!, location?.longitude)
 
                 fillAddress(problemLatLong)
-
-                //addMarcador(minhaPosicao, "Mâe to no maps")
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(minhaPosicao, 12f))
-
             }
-
             override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) { }
             override fun onProviderEnabled(p0: String?) { }
             override fun onProviderDisabled(p0: String?) { }
-
         }
     }
 
@@ -244,35 +251,37 @@ class SaveProblemActivity : AppCompatActivity() {
 
     private fun getEnderecoFormatado(latLng: LatLng): String {
         val geocoder = Geocoder(applicationContext, Locale.getDefault())
+
+        if(latLng == null) return ""
         val endereco = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
 
         if(endereco.size > 0) {
-            var completeAddress = ""
+            var completeAddress = "\n"
             if(!endereco[0].thoroughfare.isNullOrEmpty()) {
-                problem.address = endereco[0].thoroughfare
+                address = endereco[0].thoroughfare
                 completeAddress += "${getString(R.string.label_address)}: ${endereco[0].thoroughfare}\n"
             }
             if(!endereco[0].subThoroughfare.isNullOrEmpty()) {
-                problem.addressNumber = endereco[0].subThoroughfare
+                addressNumber = endereco[0].subThoroughfare
                 completeAddress += "Nº.: ${endereco[0].subThoroughfare}\n"
             }
             if(!endereco[0].subLocality.isNullOrEmpty()) {
-                problem.neighborhood = endereco[0].subLocality
+                neighborhood = endereco[0].subLocality
                 completeAddress += "${getString(R.string.label_neighborhood)}: ${endereco[0].subLocality}\n"
             }
             if(!endereco[0].locality.isNullOrEmpty() ) {
-                problem.city = endereco[0].locality
+                city = endereco[0].locality
                 completeAddress += "${getString(R.string.label_city)}: ${endereco[0].locality}\n"
             } else if(!endereco[0].subAdminArea.isNullOrEmpty()) {
-                problem.city = endereco[0].subAdminArea
+                city = endereco[0].subAdminArea
                 completeAddress += "${getString(R.string.label_city)}: ${endereco[0].subAdminArea}\n"
             }
             if(!endereco[0].adminArea.isNullOrEmpty()) {
-                problem.state = endereco[0].adminArea
+                state = endereco[0].adminArea
                 completeAddress += "${getString(R.string.label_state)}: ${endereco[0].adminArea}\n"
             }
             if(!endereco[0].postalCode.isNullOrEmpty()) {
-                problem.postalCode = endereco[0].postalCode
+                postalCode = endereco[0].postalCode
                 completeAddress += "${getString(R.string.label_postalcode)}: ${endereco[0].postalCode}\n"
             }
 

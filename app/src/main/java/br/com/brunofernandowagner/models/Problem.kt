@@ -53,13 +53,12 @@ data class Problem (
         parcel.writeString(userId)
         parcel.writeValue(lat)
         parcel.writeValue(lon)
-
-        parcel.writeValue(address)
-        parcel.writeValue(addressNumber)
-        parcel.writeValue(neighborhood)
-        parcel.writeValue(city)
-        parcel.writeValue(state)
-        parcel.writeValue(postalCode)
+        parcel.writeString(address)
+        parcel.writeString(addressNumber)
+        parcel.writeString(neighborhood)
+        parcel.writeString(city)
+        parcel.writeString(state)
+        parcel.writeString(postalCode)
     }
 
     override fun describeContents(): Int {
