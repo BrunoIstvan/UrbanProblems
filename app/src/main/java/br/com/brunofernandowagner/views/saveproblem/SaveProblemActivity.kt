@@ -137,14 +137,14 @@ class SaveProblemActivity : AppCompatActivity() {
         problem.title = edtTitle.editText?.text.toString()
         problem.detail = edtDetail.editText?.text.toString()
         if (::photoPath.isInitialized) problem.photo = photoPath
-        problem.address = address
-        problem.addressNumber = addressNumber
-        problem.neighborhood = neighborhood
-        problem.city = city
-        problem.state = state
-        problem.postalCode = postalCode
-        problem.lat = problemLatLong.latitude
-        problem.lon = problemLatLong.longitude
+        if (::address.isInitialized) problem.address = address
+        if (::addressNumber.isInitialized) problem.addressNumber = addressNumber
+        if (::neighborhood.isInitialized) problem.neighborhood = neighborhood
+        if (::city.isInitialized) problem.city = city
+        if (::state.isInitialized) problem.state = state
+        if (::postalCode.isInitialized) problem.postalCode = postalCode
+        if (::problemLatLong.isInitialized) problem.lat = problemLatLong.latitude
+        if (::problemLatLong.isInitialized) problem.lon = problemLatLong.longitude
         saveProblemViewModel.saveProblem(problem)
 
     }
