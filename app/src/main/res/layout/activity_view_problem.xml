@@ -100,7 +100,7 @@
                     <TextView
                             android:layout_centerInParent="true"
                             android:id="@+id/tvEmpty"
-                            android:text="@string/hint_location"
+                            android:text="@string/message_location_not_found"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 

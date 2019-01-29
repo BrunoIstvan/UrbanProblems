@@ -118,7 +118,7 @@ class ViewProblemActivity : AppCompatActivity() {
             completeAddress += "${getString(R.string.label_postalcode)}: ${problem.postalCode}\n"
         }
         tvAddress.text = completeAddress
-        if(!completeAddress.isNullOrEmpty()) {
+        if(!completeAddress.isNullOrEmpty() && completeAddress != "\n") {
             tvAddress.visibility = View.VISIBLE
             tvEmpty.visibility = View.GONE
         }
