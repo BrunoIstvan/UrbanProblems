@@ -7,8 +7,10 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
             android:name=".MyApp"
@@ -18,27 +20,44 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".views.MyProfileActivity">
-        </activity>
-        <activity android:name=".views.saveproblem.SaveProblemActivity">
+        <activity android:name=".views.useful_telephones.UsefulTelephonesActivity"
+            android:parentActivityName=".views.main.MainActivity"
+            android:label="@string/nav_util_telephones">
         </activity>
         <activity
-                android:name=".views.main.MainActivity"
-                android:label="@string/title_activity_main"
-                android:theme="@style/AppTheme.NoActionBar">
+            android:name=".views.myprofile.MyProfileActivity"
+            android:label="@string/nav_myprofile"
+            android:parentActivityName=".views.main.MainActivity">
         </activity>
-        <activity android:name=".views.about.AboutActivity">
+        <activity android:name=".views.saveproblem.SaveProblemActivity"
+            android:label="@string/title_report_problem">
         </activity>
-        <activity android:name=".views.viewproblem.ViewProblemActivity">
+        <activity
+            android:name=".views.main.MainActivity"
+            android:label="@string/title_main"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".views.signup.SignUpActivity"
+        <activity
+            android:name=".views.about.AboutActivity"
+            android:label="@string/nav_about"
+            android:parentActivityName=".views.main.MainActivity">
+        </activity>
+        <activity
+            android:name=".views.viewproblem.ViewProblemActivity"
+            android:parentActivityName=".views.main.MainActivity">
+        </activity>
+        <activity
+            android:name=".views.signup.SignUpActivity"
+            android:label="@string/title_signup"
             android:parentActivityName=".views.signin.SignInActivity">
         </activity>
-        <activity android:name=".views.signin.SignInActivity">
+        <activity
+            android:name=".views.signin.SignInActivity"
+            android:label="@string/title_signin">
         </activity>
         <activity
-                android:name=".views.splash.SplashActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+            android:name=".views.splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -54,12 +73,13 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="@string/google_maps_key"/>
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".views.maps.MapsActivity"
-                android:label="@string/title_activity_maps">
+            android:name=".views.maps.MapsActivity"
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".views.main.MainActivity">
         </activity>
     </application>
 

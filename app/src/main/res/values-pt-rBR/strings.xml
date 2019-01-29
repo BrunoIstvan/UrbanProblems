@@ -56,5 +56,33 @@
     <string name="message_hi_again">Olá! Seja bem-vindo novamente!</string>
     <string name="message_user_already_exists">E-mail já usado em outro cadastro</string>
     <string name="message_error_save_data">Erro ao salvar dados do usuário</string>
+    <string name="message_input_short_password">A senha deve conter no mínimo 8 caratéres</string>
+    <string name="action_settings">Configurações</string>
+    <string name="message_save_problem_success">Salvo com sucesso</string>
+    <string name="action_camera">Câmera</string>
+    <string name="message_profile_updated_success">Dados salvos com sucesso</string>
+    <string name="title_report_problem">Reporte um problema urbano</string>
+    <string name="message_ask_logout">Confirma que deseja sair?</string>
+    <string name="message_confirmation">Confirmação</string>
+    <string name="message_confirm_delete_problem">Confirme que deseja excluir esse problema urbano?</string>
+    <string name="message_delete_success">Excluído com sucesso</string>
+    <string name="useful_ambulance">Ambulância Primeiros Socorros</string>
+    <string name="useful_police">Polícia</string>
+    <string name="useful_fire">Corpo de Bombeiros</string>
+    <string name="useful_traffic">Emergência de Trânsito</string>
+    <string name="useful_subway">Metrô</string>
+    <string name="useful_bus">Ônibus</string>
+    <string name="message_not_permission_calling">Aplicativo sem permissão para realizar ligação telefônica</string>
+    <string name="message_confirm_calling">Confirma a ligação para</string>
+    <string name="message_confirm_save_problem">Confirma a gravação dos dados?</string>
+    <string name="message_get_location">Obter localização? Click no ícone abaixo</string>
+    <string name="message_pick_location">Click em obter localização para obter o endereço</string>
+    <string name="button_pick_location">OBTER LOCALIZAÇÃO</string>
+    <string name="message_location_not_found">Localização não encontrada</string>
+    <string name="label_address">Endereço</string>
+    <string name="label_neighborhood">Bairro</string>
+    <string name="label_city">Cidade</string>
+    <string name="label_postalcode">CEP</string>
+    <string name="label_state">Estado</string>
 
 </resources>

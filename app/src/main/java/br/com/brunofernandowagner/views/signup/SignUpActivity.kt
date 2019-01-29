@@ -22,8 +22,6 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        supportActionBar?.title = getString(R.string.title_signup)
-
         signUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
         signUpViewModel.loading.observe(this, loadingObserver)
         signUpViewModel.authResponseStatus.observe(this, authStatusObserver)
@@ -40,28 +38,20 @@ class SignUpActivity : AppCompatActivity() {
 
     private var saveUserStatusObserver = Observer<ResponseStatus> {
         if(it!!.success) {
-
             showLongToast(it!!.message)
             finish()
-
         } else {
-
             showLongSnack(it!!.message)
-
         }
     }
 
 
     private var authStatusObserver = Observer<ResponseStatus> {
         if(it!!.success) {
-
             showLongToast(getString(R.string.message_signup_success))
             finish()
-
         } else {
-
             showLongSnack(it!!.message)
-
         }
     }
 

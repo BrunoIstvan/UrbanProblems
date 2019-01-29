@@ -1,37 +1,65 @@
 package br.com.brunofernandowagner.models
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcel
 import android.os.Parcelable
 
+@Entity
 data class Problem (
-    val id: String = "",
-    val title: String = "",
-    val detail: String = "",
-    val photo: String = "",
-    val datetime: String = "",
-    val lat: Double = 0.0,
-    val lon: Double = 0.0
+
+    @PrimaryKey (autoGenerate = true)
+    var id: Int? ,
+    var title: String? ,
+    var detail: String? ,
+    var photo: String? ,
+    var datetime: String? ,
+    var userId: String? ,
+    var lat: Double? ,
+    var lon: Double?,
+    var address: String?,
+    var addressNumber: String?,
+    var neighborhood: String?,
+    var city: String?,
+    var state: String?,
+    var postalCode: String?
+
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readDouble(),
-        parcel.readDouble()
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
+        parcel.writeValue(id)
         parcel.writeString(title)
         parcel.writeString(detail)
         parcel.writeString(photo)
         parcel.writeString(datetime)
-        parcel.writeDouble(lat)
-        parcel.writeDouble(lon)
+        parcel.writeString(userId)
+        parcel.writeValue(lat)
+        parcel.writeValue(lon)
+
+        parcel.writeValue(address)
+        parcel.writeValue(addressNumber)
+        parcel.writeValue(neighborhood)
+        parcel.writeValue(city)
+        parcel.writeValue(state)
+        parcel.writeValue(postalCode)
     }
 
     override fun describeContents(): Int {

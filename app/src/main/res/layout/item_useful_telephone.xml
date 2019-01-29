@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp">
 
     <LinearLayout
             android:orientation="vertical"
@@ -17,8 +18,8 @@
         <ImageView
                 android:contentDescription="@string/hint_detail"
                 android:layout_height="60dp"
-                app:srcCompat="@drawable/fpo_avatar"
-                android:id="@+id/ivTelephone"
+                app:srcCompat="@drawable/ic_ambulance"
+                android:id="@+id/ivUsefulTelephone"
                 android:layout_marginTop="10dp"
                 android:layout_width="60dp"/>
 

@@ -61,5 +61,32 @@
     <string name="message_hi_again">Hi! Welcome back again!</string>
     <string name="message_user_already_exists">E-mail already used in another register</string>
     <string name="message_error_save_data">Error saving user data</string>
+    <string name="message_input_short_password">Password must have at least 8 characters</string>
+    <string name="message_save_problem_success">Saved successfully</string>
+    <string name="action_camera">Camera</string>
+    <string name="message_profile_updated_success">Data saved successfully</string>
+    <string name="title_report_problem">Report a urban problem</string>
+    <string name="message_confirmation">Confirmation</string>
+    <string name="message_ask_logout">Confirm that you want to exit?</string>
+    <string name="message_confirm_delete_problem">Confirm that you want to delete this problem?</string>
+    <string name="message_delete_success">Deleted successfully</string>
+    <string name="useful_ambulance">First-Aid Ambulance</string>
+    <string name="useful_police">Police</string>
+    <string name="useful_fire">Fire Department</string>
+    <string name="useful_traffic">Traffic emergency</string>
+    <string name="useful_subway">Subway</string>
+    <string name="useful_bus">Bus</string>
+    <string name="message_confirm_calling">Confirm the phone call to</string>
+    <string name="message_not_permission_calling">Application without permission to make phone call</string>
+    <string name="message_confirm_save_problem">Confirm saving data?</string>
+    <string name="message_get_location">Get location? Click the icon below</string>
+    <string name="message_pick_location">Tap pick location to get your address</string>
+    <string name="button_pick_location">PICK LOCATION</string>
+    <string name="message_location_not_found">Location not found</string>
+    <string name="label_address">Address</string>
+    <string name="label_neighborhood">Neighborhood</string>
+    <string name="label_city">City</string>
+    <string name="label_postalcode">Postal Code</string>
+    <string name="label_state">State</string>
 
 </resources>

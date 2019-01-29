@@ -7,6 +7,7 @@ import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.repositories.UserRepository
 import br.com.brunofernandowagner.utils.AppCtx
+import br.com.brunofernandowagner.utils.EncUtil
 
 class SignInViewModel : ViewModel() {
 
@@ -31,7 +32,12 @@ class SignInViewModel : ViewModel() {
 
         loadingLiveData.value = true
 
-        val user = User(id = null, email = pEmail, password = pPassword)
+        var encPassword = EncUtil.encrypt(pPassword)
+        encPassword = encPassword.replace("\n", "/n")
+
+        val user = User(id = null,
+                        email = pEmail,
+                        password = encPassword)
 
         userRepository.signIn(user,
             onComplete = {
@@ -58,8 +64,6 @@ class SignInViewModel : ViewModel() {
         userRepository.getUserByUid(uid,
             onComplete = {
 
-                loadingLiveData.value = false
-
                 if(it?.id == null) {
 
                     responseStatusLiveData.value = ResponseStatus(false,
@@ -72,6 +76,8 @@ class SignInViewModel : ViewModel() {
                         AppCtx.getInstance().ctx!!.getString(R.string.message_hi_again))
 
                 }
+
+                loadingLiveData.value = false
 
             },
             onError = {

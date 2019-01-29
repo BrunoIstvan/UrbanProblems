@@ -7,6 +7,7 @@ import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.repositories.UserRepository
 import br.com.brunofernandowagner.utils.AppCtx
+import br.com.brunofernandowagner.utils.EncUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +44,12 @@ class SignUpViewModel : ViewModel() {
             return
         }
 
+        if(pPassword.trim().length < 8) {
+            authResponseStatus.value = ResponseStatus(false, ctx.getString(R.string.message_input_short_password))
+            return
+        }
+
+
         loading.value = true
 
         userRepository.getUserByEmail(pEmail,
@@ -53,11 +60,14 @@ class SignUpViewModel : ViewModel() {
 
                     val vDateRegister = SimpleDateFormat("dd/MM/yyyy").format( Calendar.getInstance().time)
 
+                    var encPassword = EncUtil.encrypt(pPassword)
+                    encPassword = encPassword.replace("\n", "/n")
+
                     // preenche um novo usuário
                     val user = User(id = null,
                                     name = pFullName,
                                     email = pEmail,
-                                    password = pPassword,
+                                    password = encPassword,
                                     dateRegister = vDateRegister )
 
                     // enviar para ser cadastrado
@@ -104,15 +114,15 @@ class SignUpViewModel : ViewModel() {
 
         /*
         FirebaseDatabase.getInstance().getReference("Users")
-            .child(user.uid)
-            .setValue(user)
+            .child(userLiveData.uid)
+            .setValue(userLiveData)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
-                    loading.value = false
-                    saveUserResponseStatus.value = ResponseStatus(true, ctx.getString(R.string.message_signup_success))
+                    loadingLiveData.value = false
+                    saveUserResponseStatusLiveData.value = ResponseStatus(true, ctx.getString(R.string.message_signup_success))
                 } else {
-                    loading.value = false
-                    saveUserResponseStatus.value = ResponseStatus(false, task!!.exception!!.message!!)
+                    loadingLiveData.value = false
+                    saveUserResponseStatusLiveData.value = ResponseStatus(false, task!!.exception!!.message!!)
                 }
             }
         */

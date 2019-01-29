@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "416996063766",
+    "firebase_url": "https://urbanproblems-b1eab.firebaseio.com",
+    "project_id": "urbanproblems-b1eab",
+    "storage_bucket": "urbanproblems-b1eab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416996063766:android:77795b0828240915",
+        "android_client_info": {
+          "package_name": "br.com.brunofernandowagner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416996063766-6d7b5qb1q5qsbssocgu5gn7k6iipqvk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.brunofernandowagner",
+            "certificate_hash": "9de0231629f7efe2e883af28210b32bf670708ee"
+          }
+        },
+        {
+          "client_id": "416996063766-k1t8q0nbc7vkqt35bp4iqbsbkcafi2ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDunA-xOXnE7DxkHxgc8JWVA5nMM-yKDTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416996063766-k1t8q0nbc7vkqt35bp4iqbsbkcafi2ff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

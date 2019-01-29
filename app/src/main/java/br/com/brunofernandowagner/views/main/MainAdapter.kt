@@ -7,27 +7,35 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.models.Problem
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_problem.view.*
 
 class MainAdapter(
+
     private val context: Context,
-    private val myProblems: ArrayList<Problem>,
+    private val myProblems: List<Problem>,
     private val listener: (Problem) -> Unit
+
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val problem = myProblems[position]
         holder.bindView(problem, listener)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val view = LayoutInflater.from(context).inflate(R.layout.item_problem, parent, false)
         return ViewHolder(view)
+
     }
 
     override fun getItemCount(): Int {
+
         return myProblems.size
+
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,11 +49,12 @@ class MainAdapter(
 
             tvTitle.text = problem.title
             tvDetail.text = problem.detail
-            Picasso.get()
-                .load(problem.photo)
-                .placeholder(R.drawable.waiting_loading)
-                .error(R.drawable.no_cover_available)
-                .into(ivProblem)
+
+            if(problem.photo.isNullOrEmpty()) {
+                Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
+            } else {
+                Glide.with(this).load(problem.photo).into(ivProblem)
+            }
 
             setOnClickListener { listener(problem) }
 
@@ -53,7 +62,4 @@ class MainAdapter(
 
     }
 
-    //interface ClickListener {
-    //   fun onClick(view: View, position: Int)
-    //}
 }

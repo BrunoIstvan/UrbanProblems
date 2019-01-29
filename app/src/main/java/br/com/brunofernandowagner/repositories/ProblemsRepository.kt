@@ -1,13 +1,15 @@
 package br.com.brunofernandowagner.repositories
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import br.com.brunofernandowagner.models.Problem
 
 
 class ProblemsRepository {
 
-    fun listAllMyReportedProblems(uid: String,
-                                  onComplete: (ArrayList<Problem>) -> Unit,
-                                  onError: (String) -> Unit) {
+    fun listAllProblemsByUser(uid: String,
+                              onComplete: (ArrayList<Problem>) -> Unit,
+                              onError: (String) -> Unit) {
 
         val finalList = ArrayList<Problem>()
 
