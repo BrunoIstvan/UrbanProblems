@@ -4,61 +4,74 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.os.AsyncTask
 import br.com.brunofernandowagner.R
-import br.com.brunofernandowagner.UploadFile
+import br.com.brunofernandowagner.models.GeoLocation
 import br.com.brunofernandowagner.models.Problem
 import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
+import com.google.android.gms.maps.model.LatLng
 
 class SaveProblemViewModel : ViewModel() {
 
-    val responseStatus : MutableLiveData<ResponseStatus> = MutableLiveData()
-    val updateResponseStatus : MutableLiveData<ResponseStatus> = MutableLiveData()
-    val loading : MutableLiveData<Boolean> = MutableLiveData()
+    val responseStatusLiveData : MutableLiveData<ResponseStatus> = MutableLiveData()
+    val updateResponseStatusLiveData : MutableLiveData<ResponseStatus> = MutableLiveData()
+    val loadingLiveData : MutableLiveData<Boolean> = MutableLiveData()
+    val problemLiveData: MutableLiveData<Problem> = MutableLiveData()
+    val geoLocationLiveData: MutableLiveData<GeoLocation> = MutableLiveData()
+    val latLngLiveData: MutableLiveData<LatLng> = MutableLiveData()
 
     private lateinit var db: DatabaseProblem
 
     fun saveProblem(problem: Problem) {
 
-        loading.value = true
+        loadingLiveData.value = true
 
         db = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
 
         if(problem.id == null) {
-            InsertAsyncTask(db!!).execute(problem)
-            loading.value = false
-            updateResponseStatus.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
+            InsertAsyncTask(db).execute(problem)
+            loadingLiveData.value = false
+            updateResponseStatusLiveData.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
         } else {
-            UpdateAsyncTask(db!!).execute(problem)
-            loading.value = false
-            updateResponseStatus.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
+            UpdateAsyncTask(db).execute(problem)
+            loadingLiveData.value = false
+            updateResponseStatusLiveData.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
         }
 
 
     }
 
-    private inner class InsertAsyncTask internal
-    constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
+    fun setProblem(problem: Problem) { this.problemLiveData.value = problem }
 
-        private val db: DatabaseProblem = appDatabase
+    fun setGeoLocation(geoLocation: GeoLocation) { this.geoLocationLiveData.value = geoLocation }
 
-        override fun doInBackground(vararg params: Problem?): String {
-            db.problemDAO().insert(params[0]!!)
-            return ""
+    fun setLatLng(latLngLiveData: LatLng) { this.latLngLiveData.value = latLngLiveData }
+
+    companion object {
+
+        private class InsertAsyncTask internal
+        constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
+
+            private val db: DatabaseProblem = appDatabase
+
+            override fun doInBackground(vararg params: Problem?): String {
+                db.problemDAO().insert(params[0]!!)
+                return ""
+            }
+
         }
 
-    }
+        private class UpdateAsyncTask internal
+        constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
 
-    private inner class UpdateAsyncTask internal
-    constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
+            private val db: DatabaseProblem = appDatabase
 
-        private val db: DatabaseProblem = appDatabase
+            override fun doInBackground(vararg params: Problem?): String {
+                db.problemDAO().update(params[0]!!)
+                return ""
+            }
 
-        override fun doInBackground(vararg params: Problem?): String {
-            db.problemDAO().update(params[0]!!)
-            return ""
         }
-
     }
 
 }

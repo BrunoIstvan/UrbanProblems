@@ -20,38 +20,6 @@
                 android:scaleType="fitCenter"
                 android:background="#cccccc"/>
 
-        <android.support.design.widget.TextInputLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:hint="@string/hint_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edtTitle">
-
-            <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:hint="@string/hint_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edtDetail">
-
-            <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textMultiLine"/>
-
-        </android.support.design.widget.TextInputLayout>
-
 
         <android.support.v7.widget.CardView
                 android:elevation="4dp"
@@ -63,76 +31,121 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="10dp">
 
-            <RelativeLayout
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
-                <RelativeLayout
-                        android:minHeight="120dp"
-                        android:id="@+id/rlAddress"
-                        android:layout_alignParentTop="true"
-                        android:padding="10dp"
+                <!-- TITLE -->
+                <android.support.design.widget.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/hint_title"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edtTitle">
 
-                    <TextView
-                            android:id="@+id/tvAddress"
-                            android:text=""
-                            android:visibility="gone"
-                            android:layout_alignParentLeft="true"
+                    <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent"
+                            android:inputType="text"
+                            android:maxLength="60"/>
 
-                    <TextView
-                            android:layout_centerInParent="true"
-                            android:id="@+id/tvEmpty"
-                            android:text="@string/message_pick_location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                </android.support.design.widget.TextInputLayout>
 
-                </RelativeLayout>
 
-                <View
-                        android:layout_below="@+id/rlAddress"
-                        android:id="@+id/divider"
+                <!-- DETAIL -->
+                <android.support.design.widget.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/hint_detail"
                         android:layout_width="match_parent"
-                        android:layout_height="2px"
-                        android:background="#E1E1E1"
-                />
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edtDetail">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textMultiLine"
+                            android:maxLength="100"/>
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <RelativeLayout
-                        android:id="@+id/rlPickLocation"
-                        android:layout_below="@id/divider"
+                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
+                    <RelativeLayout
+                            android:minHeight="120dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:id="@+id/rlAddress"
+                            android:layout_alignParentTop="true"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <ImageView
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/ic_tracker"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp" />
+                        <TextView
+                                android:id="@+id/tvAddress"
+                                android:text=""
+                                android:visibility="gone"
+                                android:layout_alignParentLeft="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
 
-                        <Button
-                                android:layout_marginLeft="10dp"
-                                android:layout_height="wrap_content"
+                        <TextView
+                                android:layout_centerInParent="true"
+                                android:id="@+id/tvEmpty"
+                                android:text="@string/message_pick_location"
                                 android:layout_width="wrap_content"
-                                android:id="@+id/btnLocation"
-                                android:layout_alignParentBottom="true"
-                                android:layout_centerHorizontal="true"
-                                android:background="@android:color/transparent"
-                                android:text="@string/button_pick_location" />
+                                android:layout_height="wrap_content" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                            android:layout_below="@+id/rlAddress"
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="#E1E1E1"
+                    />
+
+                    <RelativeLayout
+                            android:id="@+id/rlPickLocation"
+                            android:layout_below="@id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            <ImageView
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/ic_tracker"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+
+                            <Button
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:id="@+id/btnLocation"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:background="@android:color/transparent"
+                                    android:text="@string/button_pick_location" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
 
 
         </android.support.v7.widget.CardView>

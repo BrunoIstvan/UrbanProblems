@@ -88,5 +88,7 @@
     <string name="label_city">City</string>
     <string name="label_postalcode">Postal Code</string>
     <string name="label_state">State</string>
+    <string name="message_confirm_delete_selected_problem">Confirm that you want to delete selected Urban Problems?
+    </string>
 
 </resources>

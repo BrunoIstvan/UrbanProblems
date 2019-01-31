@@ -64,7 +64,7 @@
     <string name="title_report_problem">Reporte um problema urbano</string>
     <string name="message_ask_logout">Confirma que deseja sair?</string>
     <string name="message_confirmation">Confirmação</string>
-    <string name="message_confirm_delete_problem">Confirme que deseja excluir esse problema urbano?</string>
+    <string name="message_confirm_delete_problem">Confirma que deseja excluir esse problema urbano?</string>
     <string name="message_delete_success">Excluído com sucesso</string>
     <string name="useful_ambulance">Ambulância Primeiros Socorros</string>
     <string name="useful_police">Polícia</string>
@@ -84,5 +84,8 @@
     <string name="label_city">Cidade</string>
     <string name="label_postalcode">CEP</string>
     <string name="label_state">Estado</string>
+    <string name="message_confirm_delete_selected_problem">Confirma que deseja excluir os problemas urbanos
+        selecionados?
+    </string>
 
 </resources>

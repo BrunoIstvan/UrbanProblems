@@ -1,6 +1,7 @@
 package br.com.brunofernandowagner.views.main
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,15 @@ class MainAdapter(
 
     private val context: Context,
     private val myProblems: List<Problem>,
-    private val listener: (Problem) -> Unit
+    private val clickListener: (Problem) -> Unit,
+    private val longClickListener: (Problem, Boolean) -> Boolean
 
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val problem = myProblems[position]
-        holder.bindView(problem, listener)
+        holder.bindView(problem, clickListener, longClickListener)
 
     }
 
@@ -41,7 +43,8 @@ class MainAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(problem: Problem,
-                     listener: (Problem) -> Unit) = with(itemView) {
+                     clickListener: (Problem) -> Unit,
+                     longClickListener: (Problem, Boolean) -> Boolean) = with(itemView) {
 
             val ivProblem = ivProblem
             val tvTitle = tvTitle
@@ -56,7 +59,18 @@ class MainAdapter(
                 Glide.with(this).load(problem.photo).into(ivProblem)
             }
 
-            setOnClickListener { listener(problem) }
+            setOnClickListener { clickListener(problem) }
+            setOnLongClickListener {
+                if(itemView.tag == null || itemView.tag == 0) {
+                    itemView.setBackgroundColor(Color.parseColor("#aaaaaa"))
+                    itemView.tag = 1
+                    longClickListener(problem, true)
+                } else {
+                    itemView.setBackgroundColor(Color.parseColor("#ffffff"))
+                    itemView.tag = 0
+                    longClickListener(problem, false)
+                }
+            }
 
         }
 

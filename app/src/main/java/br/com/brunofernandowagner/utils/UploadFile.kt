@@ -17,7 +17,7 @@ class UploadFile {
 //
 //        // Create a storage reference from our app
 //        private val storageProfileRef: StorageReference = FirebaseStorage.getInstance().reference.child("profile/thumbs/")
-//        private val storageProblemRef: StorageReference = FirebaseStorage.getInstance().reference.child("problem/thumbs/")
+//        private val storageProblemRef: StorageReference = FirebaseStorage.getInstance().reference.child("problemLiveData/thumbs/")
 //
 //        private fun upload(
 //            uid: String,

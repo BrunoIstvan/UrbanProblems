@@ -7,11 +7,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
-import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.view.Menu
@@ -20,6 +20,7 @@ import android.view.View
 import br.com.brunofernandowagner.MyApp
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.extensions.*
+import br.com.brunofernandowagner.models.GeoLocation
 import br.com.brunofernandowagner.models.Problem
 import br.com.brunofernandowagner.models.ResponseStatus
 import com.bumptech.glide.Glide
@@ -36,32 +37,54 @@ class SaveProblemActivity : AppCompatActivity() {
     private lateinit var problem: Problem
     private lateinit var saveProblemViewModel: SaveProblemViewModel
     private lateinit var photoPath: String
-    private lateinit var problemLatLong: LatLng
-    private lateinit var address: String
-    private lateinit var addressNumber: String
-    private lateinit var neighborhood: String
-    private lateinit var city: String
-    private lateinit var state: String
-    private lateinit var postalCode: String
+
+    private lateinit var problemLatLng: LatLng
+    private var geoLocation = GeoLocation()
 
     private lateinit var locationListener: LocationListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_problem)
 
-        if(intent.hasExtra("PROBLEM")) {
-            problem = intent.getParcelableExtra("PROBLEM")
-            fillProblemData(problem)
-        }
-
         saveProblemViewModel = ViewModelProviders.of(this).get(SaveProblemViewModel::class.java)
-        saveProblemViewModel.loading.observe(this, loadingObserver)
-        saveProblemViewModel.responseStatus.observe(this, responseStatusObserver)
-        saveProblemViewModel.updateResponseStatus.observe(this, updateResponseStatusObserver)
+        saveProblemViewModel.loadingLiveData.observe(this, Observer<Boolean> {
+            if(it!!) showDialog() else hideDialog()
+        })
+        saveProblemViewModel.responseStatusLiveData.observe(this, Observer<ResponseStatus> {
+            if(it?.success == true) showLongToast(it.message) else showLongSnack(it!!.message)
+        })
+        saveProblemViewModel.updateResponseStatusLiveData.observe(this, Observer<ResponseStatus> {
+            if (it?.success == true) {
+                showLongToast(it.message)
+                finish()
+            } else {
+                showLongSnack(it!!.message)
+            }
+        })
+        saveProblemViewModel.problemLiveData.observe(this, Observer<Problem> {
+            fillProblemData(it!!)
+        })
+        saveProblemViewModel.geoLocationLiveData.observe(this, Observer<GeoLocation> {
+            fillProblemLocation(it)
+            val myLocation = LatLng(it!!.latitude!!, it!!.longitude!!)
+            //problemLatLng = myLocation
+            fillAddress(myLocation)
+        })
+        saveProblemViewModel.latLngLiveData.observe(this, Observer<LatLng> {
+            fillAddress(it!!)
+        })
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        if(intent.hasExtra("PROBLEM")) {
+            problem = intent.getParcelableExtra("PROBLEM")
+        } else {
+            problem = Problem()
+        }
+        saveProblemViewModel.setProblem(problem)
 
         initLocationListener()
 
@@ -71,20 +94,16 @@ class SaveProblemActivity : AppCompatActivity() {
 
     }
 
-    private var responseStatusObserver = Observer<ResponseStatus> {
-        if(it?.success == true) {
-            showLongToast(it.message)
-        } else {
-            showLongSnack(it!!.message)
-        }
-    }
+    private fun fillProblemLocation(it: GeoLocation?) {
+        problem.address = it!!.address
+        problem.addressNumber = it!!.addressNumber
+        problem.neighborhood = it!!.neighborhood
+        problem.city = it!!.city
+        problem.state = it!!.state
+        problem.postalCode = it!!.postalCode
 
-    private var loadingObserver = Observer<Boolean> {
-        if(it!!) {
-            showDialog()
-        } else {
-            hideDialog()
-        }
+        problem.latitude = it!!.latitude
+        problem.longitude = it!!.longitude
     }
 
     private fun fillProblemData(problem: Problem) {
@@ -97,9 +116,10 @@ class SaveProblemActivity : AppCompatActivity() {
         } else {
             Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
         }
-        if(problem.lat != null && problem.lat!! != 0.0 && problem.lon != null && problem.lon!! != 0.0) {
-            val myLocation = LatLng(problem.lat!!, problem.lon!!)
-            problemLatLong = myLocation
+        if(problem!!.latitude != null && problem!!.latitude!! != 0.0 &&
+            problem.longitude != null && problem!!.longitude!! != 0.0) {
+            val myLocation = LatLng(problem.latitude!!, problem.longitude!!)
+            problemLatLng = myLocation
             fillAddress(myLocation)
         }
     }
@@ -119,43 +139,24 @@ class SaveProblemActivity : AppCompatActivity() {
     }
 
     private fun confirmSave() {
-
         showActionDialog(getString(R.string.message_confirmation),
                          getString(R.string.message_confirm_save_problem),
                          onPositiveClick = { save() })
-
     }
 
     private fun save() {
 
-        if(!::problem.isInitialized) {
-            problem = Problem(null, null, null, null, null, null, null, null, null, null, null, null, null, null)
-            problem.datetime = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
-        }
-
+        problem.datetime = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
         problem.userId = MyApp.user!!.id
         problem.title = edtTitle.editText?.text.toString()
         problem.detail = edtDetail.editText?.text.toString()
+
         if (::photoPath.isInitialized) problem.photo = photoPath
-        if (::address.isInitialized) problem.address = address
-        if (::addressNumber.isInitialized) problem.addressNumber = addressNumber
-        if (::neighborhood.isInitialized) problem.neighborhood = neighborhood
-        if (::city.isInitialized) problem.city = city
-        if (::state.isInitialized) problem.state = state
-        if (::postalCode.isInitialized) problem.postalCode = postalCode
-        if (::problemLatLong.isInitialized) problem.lat = problemLatLong.latitude
-        if (::problemLatLong.isInitialized) problem.lon = problemLatLong.longitude
+
+        fillProblemLocation(geoLocation)
+
         saveProblemViewModel.saveProblem(problem)
 
-    }
-
-    private var updateResponseStatusObserver = Observer<ResponseStatus> {
-        if(it?.success == true) {
-            showLongToast(it.message)
-            finish()
-        } else {
-            showLongSnack(it!!.message)
-        }
     }
 
     private fun choosePicture() {
@@ -167,7 +168,7 @@ class SaveProblemActivity : AppCompatActivity() {
 
         pictureDialog.setItems(pictureDialogItems) { _, which ->
             when (which) {
-                0 -> choosePhotoFromGallary()
+                0 -> choosePhotoFromGallery()
                 1 -> takePhotoFromCamera()
             }
         }
@@ -176,7 +177,7 @@ class SaveProblemActivity : AppCompatActivity() {
 
     }
 
-    private fun choosePhotoFromGallary() {
+    private fun choosePhotoFromGallery() {
 
         ImagePicker.create(this)
             .returnMode(ReturnMode.GALLERY_ONLY) // set whether pick and / or camera action should return immediate result or not.
@@ -231,11 +232,13 @@ class SaveProblemActivity : AppCompatActivity() {
 
     private fun initLocationListener() {
         locationListener = object : LocationListener{
-            override fun onLocationChanged(location: Location?) {
-                problemLatLong = LatLng(location?.latitude!!, location?.longitude)
-
-                fillAddress(problemLatLong)
+            override fun onLocationChanged(location: android.location.Location?) {
+                problemLatLng = LatLng(location?.latitude!!, location?.longitude!!)
+                hideDialog()
+                saveProblemViewModel.setLatLng(problemLatLng)
+                //fillAddress(problemLatLng)
             }
+
             override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) { }
             override fun onProviderEnabled(p0: String?) { }
             override fun onProviderDisabled(p0: String?) { }
@@ -243,6 +246,12 @@ class SaveProblemActivity : AppCompatActivity() {
     }
 
     private fun requestLocationUpdates(){
+        showDialog()
+        // Desativar o loadingLiveData após 10 segundos...
+        Handler().postDelayed({
+            hideDialog()
+        }, 10000L)
+
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener)
@@ -250,41 +259,47 @@ class SaveProblemActivity : AppCompatActivity() {
     }
 
     private fun getEnderecoFormatado(latLng: LatLng): String {
+
         val geocoder = Geocoder(applicationContext, Locale.getDefault())
 
-        if(latLng == null) return ""
+        //if(latLng == null) return ""
         val endereco = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
 
         if(endereco.size > 0) {
+
+            geoLocation = GeoLocation()
+            geoLocation.latitude = latLng.latitude
+            geoLocation.longitude = latLng.longitude
+
             var completeAddress = "\n"
             if(!endereco[0].thoroughfare.isNullOrEmpty()) {
-                address = endereco[0].thoroughfare
+                geoLocation.address = endereco[0].thoroughfare
                 completeAddress += "${getString(R.string.label_address)}: ${endereco[0].thoroughfare}\n"
             }
             if(!endereco[0].subThoroughfare.isNullOrEmpty()) {
-                addressNumber = endereco[0].subThoroughfare
+                geoLocation.addressNumber = endereco[0].subThoroughfare
                 completeAddress += "Nº.: ${endereco[0].subThoroughfare}\n"
             }
             if(!endereco[0].subLocality.isNullOrEmpty()) {
-                neighborhood = endereco[0].subLocality
+                geoLocation.neighborhood = endereco[0].subLocality
                 completeAddress += "${getString(R.string.label_neighborhood)}: ${endereco[0].subLocality}\n"
             }
             if(!endereco[0].locality.isNullOrEmpty() ) {
-                city = endereco[0].locality
+                geoLocation.city = endereco[0].locality
                 completeAddress += "${getString(R.string.label_city)}: ${endereco[0].locality}\n"
             } else if(!endereco[0].subAdminArea.isNullOrEmpty()) {
-                city = endereco[0].subAdminArea
+                geoLocation.city = endereco[0].subAdminArea
                 completeAddress += "${getString(R.string.label_city)}: ${endereco[0].subAdminArea}\n"
             }
             if(!endereco[0].adminArea.isNullOrEmpty()) {
-                state = endereco[0].adminArea
+                geoLocation.state = endereco[0].adminArea
                 completeAddress += "${getString(R.string.label_state)}: ${endereco[0].adminArea}\n"
             }
             if(!endereco[0].postalCode.isNullOrEmpty()) {
-                postalCode = endereco[0].postalCode
+                geoLocation.postalCode = endereco[0].postalCode
                 completeAddress += "${getString(R.string.label_postalcode)}: ${endereco[0].postalCode}\n"
             }
-
+            fillProblemLocation(geoLocation)
             return completeAddress
         } else {
 

@@ -30,78 +30,82 @@
                     android:layout_height="200dp"
                     android:src="@drawable/fpo_avatar"/>
 
-            <!--<ImageButton-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:layout_width="40dp"-->
-                    <!--android:layout_height="40dp"-->
-                    <!--android:backgroundTint="@android:color/white"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--android:contentDescription="@string/ef_camera"-->
-                    <!--android:tint="@android:color/white"-->
-                    <!--android:id="@+id/btnCamera"-->
-                    <!--android:src="@android:drawable/ic_menu_camera"-->
-                    <!--android:layout_marginBottom="10dp"/>-->
-
         </LinearLayout>
 
-        <TextView
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/hint_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <TextView
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/hint_name"
-                android:textAlignment="center"
-                android:textSize="22sp"
+        <android.support.v7.widget.CardView
+                android:elevation="4dp"
+                android:layout_margin="30dp"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvFullname"/>
+                app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/hint_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/hint_name"
+                        android:textAlignment="center"
+                        android:textSize="22sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvFullname"/>
 
 
-        <TextView
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/hint_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/hint_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-        <TextView
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:text="@string/hint_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvEmail"/>
+                <TextView
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textSize="22sp"
+                        android:text="@string/hint_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvEmail"/>
 
 
-        <TextView
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/hint_date_creation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/hint_date_creation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-        <TextView
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:text="@string/hint_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvDateRegistration"/>
+                <TextView
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textSize="22sp"
+                        android:text="@string/hint_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvDateRegistration"/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

@@ -35,6 +35,8 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var problems : ArrayList<Problem> = arrayListOf()
+    private val selectedProblemsIds = ArrayList<Int>()
+    private lateinit var menuAct: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -50,6 +52,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initializeNavigationView()
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        selectedProblemsIds.clear()
+        if(::menuAct.isInitialized)
+            menuAct.findItem(R.id.action_delete).isVisible = selectedProblemsIds.size != 0
     }
 
     override fun onBackPressed() {
@@ -79,23 +88,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun listAll(list: ArrayList<Problem>) {
 
         hideDialog()
-        if(list != null) {
 
-            problems = list
+        problems = list
 
-            // FUNCIONANDO
-            rvProblems.adapter = MainAdapter(this, list) { problem ->
-                val intent = Intent(this, ViewProblemActivity::class.java)
-                MyApp.problemId = problem.id!!
-                intent.putExtra("PROBLEM", problem)
-                intent.putExtra("ORIGEM", "LISTA")
-                startActivity(intent)
-            }
-            val layoutManager = LinearLayoutManager(this)
-            //val gridLayoutManager = GridLayoutManager(this, 2)
-            rvProblems.layoutManager = layoutManager
-        }
+        // FUNCIONANDO
+        rvProblems.adapter = MainAdapter(this, list,
+            clickListener = { problem ->
+                openViewProblemActivity(problem)
+            },
+            longClickListener = { problem, selected ->
+                if(selected) {
+                    if(!selectedProblemsIds.contains(problem.id)) {
+                        selectedProblemsIds.add(problem.id!!)
+                    }
+                } else {
+                    selectedProblemsIds.remove(problem.id!!)
+                }
+                menuAct.findItem(R.id.action_delete).isVisible = selectedProblemsIds.size != 0
+                true
+            })
+        val layoutManager = LinearLayoutManager(this)
+        //val gridLayoutManager = GridLayoutManager(this, 2)
+        rvProblems.layoutManager = layoutManager
 
+    }
+
+    private fun openViewProblemActivity(problem: Problem) {
+        val intent = Intent(this, ViewProblemActivity::class.java)
+        MyApp.problemId = problem.id!!
+        intent.putExtra("PROBLEM", problem)
+        intent.putExtra("ORIGEM", "LISTA")
+        startActivity(intent)
     }
 
     private fun fillUserData(user: User) {
@@ -116,7 +139,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.menu_maps -> {
                 val intent = Intent(this, MapsActivity::class.java)
-                intent.putExtra("PROBLEMS", problems as ArrayList<Problem>)
+                intent.putExtra("PROBLEMS", problems)
                 startActivity(intent)
             }
             R.id.menu_utils_telephones -> startActivity(Intent(this, UsefulTelephonesActivity::class.java))
@@ -131,14 +154,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_navigation, menu)
+        menu?.findItem(R.id.action_delete)?.isVisible = false
+        menuAct = menu!!
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_logout -> confirmLogout()
+            R.id.action_delete -> confirmDeleteProblems()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun confirmDeleteProblems() {
+
+        showActionDialog(getString(R.string.message_confirmation),
+            getString(R.string.message_confirm_delete_selected_problem),
+            onPositiveClick = { deleteProblems() })
+
+    }
+
+    private fun deleteProblems() {
+
     }
 
     private fun confirmLogout() {

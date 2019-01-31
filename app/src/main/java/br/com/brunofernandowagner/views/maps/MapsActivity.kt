@@ -3,6 +3,7 @@ package br.com.brunofernandowagner.views.maps
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import br.com.brunofernandowagner.R
+import br.com.brunofernandowagner.models.Problem
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,13 +16,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
+    private lateinit var problems: ArrayList<Problem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
+        if(intent.hasExtra("PROBLEMS")) {
+            problems = intent.getParcelableArrayListExtra("PROBLEMS")
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     /**
@@ -36,9 +44,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        if(::problems.isInitialized) {
+
+            for(prob in problems) {
+
+                if(prob.latitude != null && prob.latitude != 0.0 &&
+                   prob.longitude != null && prob.longitude != 0.0) {
+                    // Add a marker in Sydney and move the camera
+                    val point = LatLng(prob.latitude!!, prob.longitude!!)
+                    mMap.addMarker(MarkerOptions().position(point).title(prob.title))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(point))
+                }
+
+            }
+
+        }
+
     }
 }

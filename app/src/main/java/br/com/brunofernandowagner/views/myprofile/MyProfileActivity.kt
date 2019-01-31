@@ -178,7 +178,7 @@ class MyProfileActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId) {
-            R.id.action_save -> saveProfile()
+            //R.id.action_save -> saveProfile()
             R.id.action_camera -> choosePicture()
         }
         return super.onOptionsItemSelected(item)
