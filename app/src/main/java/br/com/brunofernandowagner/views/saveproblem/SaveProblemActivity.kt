@@ -116,12 +116,21 @@ class SaveProblemActivity : AppCompatActivity() {
         } else {
             Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
         }
-        if(problem!!.latitude != null && problem!!.latitude!! != 0.0 &&
-            problem.longitude != null && problem!!.longitude!! != 0.0) {
-            val myLocation = LatLng(problem.latitude!!, problem.longitude!!)
-            problemLatLng = myLocation
-            fillAddress(myLocation)
+
+        problem.latitude?.let { lat ->
+            problem.longitude?.let { lon ->
+                val myLocation = LatLng(lat, lon)
+                problemLatLng = myLocation
+                fillAddress(myLocation)
+            }
         }
+
+//        if(problem!!.latitude. != null && problem!!.latitude!! != 0.0 &&
+//            problem.longitude != null && problem!!.longitude!! != 0.0) {
+//            val myLocation = LatLng(problem.latitude!!, problem.longitude!!)
+//            problemLatLng = myLocation
+//            fillAddress(myLocation)
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

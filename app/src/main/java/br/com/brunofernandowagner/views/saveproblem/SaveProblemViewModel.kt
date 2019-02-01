@@ -28,22 +28,23 @@ class SaveProblemViewModel : ViewModel() {
 
         db = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
 
-        if(problem.id == null) {
-            InsertAsyncTask(db).execute(problem)
-            loadingLiveData.value = false
-            updateResponseStatusLiveData.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
-        } else {
+        problem.id?.let {
             UpdateAsyncTask(db).execute(problem)
             loadingLiveData.value = false
-            updateResponseStatusLiveData.value = ResponseStatus(true, AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
+            updateResponseStatusLiveData.value = ResponseStatus(true,
+                AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
+        } ?: run {
+            InsertAsyncTask(db).execute(problem)
+            loadingLiveData.value = false
+            updateResponseStatusLiveData.value = ResponseStatus(true,
+                AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
         }
-
 
     }
 
     fun setProblem(problem: Problem) { this.problemLiveData.value = problem }
 
-    fun setGeoLocation(geoLocation: GeoLocation) { this.geoLocationLiveData.value = geoLocation }
+    // fun setGeoLocation(geoLocation: GeoLocation) { this.geoLocationLiveData.value = geoLocation }
 
     fun setLatLng(latLngLiveData: LatLng) { this.latLngLiveData.value = latLngLiveData }
 

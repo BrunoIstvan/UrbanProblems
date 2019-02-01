@@ -27,6 +27,7 @@ class MyProfileActivity : AppCompatActivity() {
     private lateinit var myProfileViewModel: MyProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_profile)
 
@@ -41,7 +42,6 @@ class MyProfileActivity : AppCompatActivity() {
     }
 
     private var updateResponseStatusObserver = Observer<ResponseStatus> {
-
         if(it?.success == true) {
             showShortSnack(it.message)
             hideDialog()
@@ -49,11 +49,9 @@ class MyProfileActivity : AppCompatActivity() {
             showLongSnack(it!!.message)
             hideDialog()
         }
-
     }
 
     private var uploadResponseStatusObserver = Observer<ResponseStatus> {
-
         if(it?.success == true) {
             showShortSnack(it!!.message)
             hideDialog()
@@ -61,27 +59,21 @@ class MyProfileActivity : AppCompatActivity() {
             showLongSnack(it!!.message)
             hideDialog()
         }
-
     }
 
     private var responseStatusObserver = Observer<ResponseStatus> {
-
         if(it?.success == true) {
-
         } else {
             showLongSnack(it!!.message)
         }
-
     }
 
     private var loadingObserver = Observer<Boolean> {
-
         if(it!!) {
             showDialog()
         } else {
             hideDialog()
         }
-
     }
 
     private fun choosePicture() {
@@ -127,9 +119,7 @@ class MyProfileActivity : AppCompatActivity() {
     }
 
     private fun takePhotoFromCamera() {
-
         ImagePicker.cameraOnly().start(this)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -166,9 +156,7 @@ class MyProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfile() {
-
         myProfileViewModel.saveUserProfile(MyApp.user!!)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

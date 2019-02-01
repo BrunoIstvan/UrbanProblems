@@ -62,19 +62,15 @@ class SignInViewModel : ViewModel() {
         loadingLiveData.value = true
 
         userRepository.getUserByUid(uid,
-            onComplete = {
+            onComplete = { user ->
 
-                if(it?.id == null) {
-
-                    responseStatusLiveData.value = ResponseStatus(false,
-                        AppCtx.getInstance().ctx!!.getString(R.string.error_get_by_id))
-
-                } else {
-
+                user?.let {
                     userLiveData.value = it
                     responseStatusLiveData.value = ResponseStatus(true,
                         AppCtx.getInstance().ctx!!.getString(R.string.message_hi_again))
-
+                } ?: run {
+                    responseStatusLiveData.value = ResponseStatus(false,
+                        AppCtx.getInstance().ctx!!.getString(R.string.error_get_by_id))
                 }
 
                 loadingLiveData.value = false

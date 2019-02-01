@@ -43,14 +43,9 @@ class SignInActivity : AppCompatActivity() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ).withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-
-                }
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) { }
                 override fun onPermissionRationaleShouldBeShown(permissions: List<PermissionRequest>,
-                                                                token: PermissionToken
-                ) {
-
-                }
+                                                                token: PermissionToken ) { }
             }).check()
 
         //supportActionBar?.title = getString(R.string.title_signin)
@@ -63,22 +58,24 @@ class SignInActivity : AppCompatActivity() {
         // prepara o serviço de shared preferences
         sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE)
 
-        // se foi armazenado anteriormente para manter conectado...
-        if(sharedPreferences.getBoolean("MANTER_CONECTADO", false)) {
+        sharedPreferences?.let {
+            // se foi armazenado anteriormente para manter conectado...
+            if(it.getBoolean("MANTER_CONECTADO", false)) {
 
-            chkKeepConnected.isChecked = true
+                chkKeepConnected.isChecked = true
 
-            // verificar se o id do usuário está preenchido
-            if(sharedPreferences.getString("USUARIO", "").isNotEmpty()) {
+                // verificar se o id do usuário está preenchido
+                if(it.getString("USUARIO", "").isNotEmpty()) {
 
-                // recuperar
-                val uid = sharedPreferences.getString("USUARIO", "")
+                    // recuperar
+                    val uid = sharedPreferences.getString("USUARIO", "")
 
-                // executar a busca pelo usuário que quer se manter conectado...
-                signInViewModel.getUserByUid(uid)
+                    // executar a busca pelo usuário que quer se manter conectado...
+                    signInViewModel.getUserByUid(uid)
+
+                }
 
             }
-
         }
 
         // configurar o click do botão para ir até a tela de cadastro
@@ -90,15 +87,13 @@ class SignInActivity : AppCompatActivity() {
         btnSignIn.setOnClickListener {
             signInViewModel.signIn(edtEmail.editText?.text.toString(),
                 edtPassword.editText?.text.toString())
-
         }
 
     }
 
-
     private var userObserver = Observer<User> {
 
-        if(it != null) {
+        it?.let {
 
             showDialog()
             val editor = sharedPreferences.edit()
@@ -111,32 +106,24 @@ class SignInActivity : AppCompatActivity() {
             hideDialog()
             finish()
 
-
         }
 
     }
 
-
     private var responseStatusObserver = Observer<ResponseStatus> {
-
         if(it!!.success) {
             showLongToast(it.message)
         } else {
             showLongSnack(it.message)
         }
-
     }
 
-
     private var loadingObserver = Observer<Boolean> {
-
         if(it == true) {
             showDialog()
         } else {
             hideDialog()
         }
-
     }
-
 
 }

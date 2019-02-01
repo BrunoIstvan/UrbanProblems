@@ -19,7 +19,6 @@ class SignUpViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
 
-
     fun signUp(pFullName: String, pEmail: String, pPassword: String, pConfirmPassword: String) {
 
         val ctx = AppCtx.getInstance().ctx!!
@@ -48,7 +47,6 @@ class SignUpViewModel : ViewModel() {
             authResponseStatus.value = ResponseStatus(false, ctx.getString(R.string.message_input_short_password))
             return
         }
-
 
         loading.value = true
 
@@ -85,7 +83,6 @@ class SignUpViewModel : ViewModel() {
 
                         })
 
-
                 } else {
 
                     loading.value = false
@@ -105,13 +102,10 @@ class SignUpViewModel : ViewModel() {
     }
 
 
-    fun saveUserData(user: User) {
-
-        val ctx = AppCtx.getInstance().ctx!!
-        loading.value = true
-
-
-
+//    fun saveUserData(user: User) {
+//
+//        val ctx = AppCtx.getInstance().ctx!!
+//        loading.value = true
         /*
         FirebaseDatabase.getInstance().getReference("Users")
             .child(userLiveData.uid)
@@ -127,7 +121,7 @@ class SignUpViewModel : ViewModel() {
             }
         */
 
-    }
+//    }
 
 
 }

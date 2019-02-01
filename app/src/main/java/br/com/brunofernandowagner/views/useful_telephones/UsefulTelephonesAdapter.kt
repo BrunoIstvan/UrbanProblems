@@ -49,9 +49,7 @@ class UsefulTelephonesAdapter(
 
             tvTelephoneName.text = telephone.name
             tvTelephoneNumber.text = telephone.number.toString()
-
             Glide.with(this).load(telephone.image).into(ivUsefulTelephone)
-
             setOnClickListener { listener(telephone) }
 
         }

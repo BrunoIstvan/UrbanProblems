@@ -11,5 +11,4 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_about)
     }
 
-
 }

@@ -14,6 +14,4 @@
           android:icon="@drawable/custom_menu_exit"
           app:showAsAction="always" />
 
-
-
 </menu>

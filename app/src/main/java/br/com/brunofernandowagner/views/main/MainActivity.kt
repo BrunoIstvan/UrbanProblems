@@ -16,7 +16,10 @@ import br.com.brunofernandowagner.MyApp
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.extensions.hideDialog
 import br.com.brunofernandowagner.extensions.showActionDialog
+import br.com.brunofernandowagner.extensions.showDialog
+import br.com.brunofernandowagner.extensions.showLongSnack
 import br.com.brunofernandowagner.models.Problem
+import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.views.about.AboutActivity
 import br.com.brunofernandowagner.views.maps.MapsActivity
@@ -35,22 +38,21 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var problems : ArrayList<Problem> = arrayListOf()
-    private val selectedProblemsIds = ArrayList<Int>()
+    private val selectedProblemsIds = ArrayList<Problem>()
     private lateinit var menuAct: Menu
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
-
+        // inicializa a mainviewmodel
+        initializeMainViewModel()
         // inicializa o click do Fab Button
         initializeFabButton()
-
         // inicializa o comportamento do navigationview
         initializeNavigationView()
-
 
     }
 
@@ -62,35 +64,49 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
-
     }
 
     override fun onStart() {
-
         super.onStart()
         hideDialog()
-        if(MyApp.user == null) {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-        } else {
+//        if(MyApp.user == null) {
+//            startActivity(Intent(this, SignInActivity::class.java))
+//            finish()
+//        } else {
+//            fillUserData(MyApp.user!!)
+//            initializeListProblemsViewModel()
+//        }
+        MyApp.user?.let {
             fillUserData(MyApp.user!!)
             initializeListProblemsViewModel()
+        } ?: run {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
+    }
 
+    private fun initializeMainViewModel() {
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+//        mainViewModel.loadingLiveData.observe(this, Observer<Boolean> {
+//            if(it!!) showDialog() else hideDialog()
+//        })
+        mainViewModel.deleteResponseStatusLiveData.observe(this, Observer<ResponseStatus> {
+            if(it!!.success) {
+                initializeListProblemsViewModel()
+                showLongSnack(it.message)
+            }
+        })
     }
 
     private fun listAll(list: ArrayList<Problem>) {
 
-        hideDialog()
 
         problems = list
-
         // FUNCIONANDO
         rvProblems.adapter = MainAdapter(this, list,
             clickListener = { problem ->
@@ -98,11 +114,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             },
             longClickListener = { problem, selected ->
                 if(selected) {
-                    if(!selectedProblemsIds.contains(problem.id)) {
-                        selectedProblemsIds.add(problem.id!!)
+                    if(!selectedProblemsIds.contains(problem)) {
+                        selectedProblemsIds.add(problem)
                     }
                 } else {
-                    selectedProblemsIds.remove(problem.id!!)
+                    selectedProblemsIds.remove(problem)
                 }
                 menuAct.findItem(R.id.action_delete).isVisible = selectedProblemsIds.size != 0
                 true
@@ -110,15 +126,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val layoutManager = LinearLayoutManager(this)
         //val gridLayoutManager = GridLayoutManager(this, 2)
         rvProblems.layoutManager = layoutManager
-
+        hideDialog()
+        
     }
 
     private fun openViewProblemActivity(problem: Problem) {
+
         val intent = Intent(this, ViewProblemActivity::class.java)
         MyApp.problemId = problem.id!!
         intent.putExtra("PROBLEM", problem)
         intent.putExtra("ORIGEM", "LISTA")
         startActivity(intent)
+
     }
 
     private fun fillUserData(user: User) {
@@ -177,14 +196,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun deleteProblems() {
 
+        showDialog()
+        mainViewModel.removeProblems(selectedProblemsIds)
+
     }
 
     private fun confirmLogout() {
-
         showActionDialog(getString(R.string.message_confirmation),
             getString(R.string.message_ask_logout),
             onPositiveClick = { logout() })
-
     }
 
     private fun logout() {
@@ -226,6 +246,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .problems
             .observe(this, Observer<List<Problem>> { list ->
                 listAll(ArrayList(list!!))
+                hideDialog()
             })
     }
 

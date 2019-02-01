@@ -2,37 +2,38 @@ package br.com.brunofernandowagner.views.main
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.os.AsyncTask
 import br.com.brunofernandowagner.R
+import br.com.brunofernandowagner.models.Problem
 import br.com.brunofernandowagner.models.ResponseStatus
-import br.com.brunofernandowagner.models.User
-import br.com.brunofernandowagner.repositories.UserRepository
+import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
 
 class MainViewModel : ViewModel() {
 
-    val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val userResponseStatusLiveData: MutableLiveData<ResponseStatus> = MutableLiveData()
-    val userLiveData: MutableLiveData<User> = MutableLiveData()
+    val deleteResponseStatusLiveData: MutableLiveData<ResponseStatus> = MutableLiveData()
+    private val db: DatabaseProblem = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
 
-    private val userRepository = UserRepository()
+    fun removeProblems(list: ArrayList<Problem>) {
 
-    fun getUserByUid(uid: String) {
-        loadingLiveData.value = true
-        userRepository.getUserByUid(uid,
-            onComplete = {
-                loadingLiveData.value = false
-                if(it?.id == null) {
-                    userResponseStatusLiveData.value = ResponseStatus(false,
-                        AppCtx.getInstance().ctx!!.getString(R.string.error_get_by_id))
-                } else {
-                    userLiveData.value = it
-                    userResponseStatusLiveData.value = ResponseStatus(true, "")
-                }
-            },
-            onError = {
-                loadingLiveData.value = false
-                userResponseStatusLiveData.value = ResponseStatus(false, it!!)
-            })
+        for(prob in list) {
+            RemoveAsyncTask(db).execute(prob)
+        }
+        deleteResponseStatusLiveData.value = ResponseStatus(true,
+            AppCtx.getInstance().ctx!!.getString(R.string.message_delete_success))
+
+    }
+
+    companion object {
+
+        private class RemoveAsyncTask internal
+        constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
+            private val db: DatabaseProblem = appDatabase
+            override fun doInBackground(vararg params: Problem?): String {
+                db.problemDAO().remove(params[0]!!)
+                return ""
+            }
+        }
     }
 
 }
