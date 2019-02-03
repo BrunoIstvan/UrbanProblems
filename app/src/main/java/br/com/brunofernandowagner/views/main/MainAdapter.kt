@@ -16,14 +16,15 @@ class MainAdapter(
     private val context: Context,
     private val myProblems: List<Problem>,
     private val clickListener: (Problem) -> Unit,
-    private val longClickListener: (Problem, Boolean) -> Boolean
+    private val longClickListener: (Problem, Boolean) -> Boolean,
+    private val shareClickListener: (Problem) -> Unit
 
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val problem = myProblems[position]
-        holder.bindView(problem, clickListener, longClickListener)
+        holder.bindView(problem, clickListener, longClickListener, shareClickListener)
 
     }
 
@@ -44,14 +45,21 @@ class MainAdapter(
 
         fun bindView(problem: Problem,
                      clickListener: (Problem) -> Unit,
-                     longClickListener: (Problem, Boolean) -> Boolean) = with(itemView) {
+                     longClickListener: (Problem, Boolean) -> Boolean,
+                     shareClickListener: (Problem) -> Unit) = with(itemView) {
 
             val ivProblem = ivProblem
+            val ibShareProblem = ibShareProblem
             val tvTitle = tvTitle
             val tvDetail = tvDetail
 
             tvTitle.text = problem.title
-            tvDetail.text = problem.detail
+            problem.detail?.let {
+                tvDetail.text = if (problem.detail.toString().length > 50) {
+                    problem.detail.toString().substring(0, 49) } else { problem.detail.toString() }
+            } ?: run {
+                tvDetail.text = ""
+            }
 
             if(problem.photo.isNullOrEmpty()) {
                 Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
@@ -71,6 +79,7 @@ class MainAdapter(
                     longClickListener(problem, false)
                 }
             }
+            ibShareProblem.setOnClickListener { shareClickListener(problem) }
 
         }
 

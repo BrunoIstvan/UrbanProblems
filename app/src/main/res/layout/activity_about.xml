@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,4 +7,76 @@
         android:layout_height="match_parent"
         tools:context=".views.about.AboutActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+            android:alpha=".2"
+            android:id="@+id/ivLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/hole_street" />
+
+    <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name"
+            android:textSize="50sp"
+            android:textColor="@android:color/black"/>
+
+    <TextView
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/title_developers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"/>
+
+
+    <TextView
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Bruno I. C. Monteiro (RM: 331122)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDev1"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+
+
+    <TextView
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="250dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Fernando"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDev2"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+
+
+    <TextView
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Wágner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDev3"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"/>
+
+</RelativeLayout>

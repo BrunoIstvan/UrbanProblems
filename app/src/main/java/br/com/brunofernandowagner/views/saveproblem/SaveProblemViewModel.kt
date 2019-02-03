@@ -19,10 +19,25 @@ class SaveProblemViewModel : ViewModel() {
     val problemLiveData: MutableLiveData<Problem> = MutableLiveData()
     val geoLocationLiveData: MutableLiveData<GeoLocation> = MutableLiveData()
     val latLngLiveData: MutableLiveData<LatLng> = MutableLiveData()
+    val imagePathLiveData : MutableLiveData<String> = MutableLiveData()
 
     private lateinit var db: DatabaseProblem
 
     fun saveProblem(problem: Problem) {
+
+        val ctx = AppCtx.getInstance().ctx!!
+
+        if (problem.title.isNullOrEmpty()) {
+            updateResponseStatusLiveData.value = ResponseStatus(false,
+                ctx.getString(R.string.message_input_title))
+            return
+        }
+
+        if(problem.photo.isNullOrEmpty()) {
+            updateResponseStatusLiveData.value = ResponseStatus(false,
+                ctx.getString(R.string.message_take_picture))
+            return
+        }
 
         loadingLiveData.value = true
 
@@ -44,9 +59,9 @@ class SaveProblemViewModel : ViewModel() {
 
     fun setProblem(problem: Problem) { this.problemLiveData.value = problem }
 
-    // fun setGeoLocation(geoLocation: GeoLocation) { this.geoLocationLiveData.value = geoLocation }
-
     fun setLatLng(latLngLiveData: LatLng) { this.latLngLiveData.value = latLngLiveData }
+
+    fun setImagePath(imagePath: String) { this.imagePathLiveData.value = imagePath }
 
     companion object {
 

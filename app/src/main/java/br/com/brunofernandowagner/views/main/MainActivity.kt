@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // inicializa a mainviewmodel
         initializeMainViewModel()
         // inicializa o click do Fab Button
-        initializeFabButton()
+        //initializeFabButton()
         // inicializa o comportamento do navigationview
         initializeNavigationView()
 
@@ -74,13 +74,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onStart() {
         super.onStart()
         hideDialog()
-//        if(MyApp.user == null) {
-//            startActivity(Intent(this, SignInActivity::class.java))
-//            finish()
-//        } else {
-//            fillUserData(MyApp.user!!)
-//            initializeListProblemsViewModel()
-//        }
         MyApp.user?.let {
             fillUserData(MyApp.user!!)
             initializeListProblemsViewModel()
@@ -88,69 +81,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
         }
-    }
-
-    private fun initializeMainViewModel() {
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-//        mainViewModel.loadingLiveData.observe(this, Observer<Boolean> {
-//            if(it!!) showDialog() else hideDialog()
-//        })
-        mainViewModel.deleteResponseStatusLiveData.observe(this, Observer<ResponseStatus> {
-            if(it!!.success) {
-                initializeListProblemsViewModel()
-                showLongSnack(it.message)
-            }
-        })
-    }
-
-    private fun listAll(list: ArrayList<Problem>) {
-
-
-        problems = list
-        // FUNCIONANDO
-        rvProblems.adapter = MainAdapter(this, list,
-            clickListener = { problem ->
-                openViewProblemActivity(problem)
-            },
-            longClickListener = { problem, selected ->
-                if(selected) {
-                    if(!selectedProblemsIds.contains(problem)) {
-                        selectedProblemsIds.add(problem)
-                    }
-                } else {
-                    selectedProblemsIds.remove(problem)
-                }
-                menuAct.findItem(R.id.action_delete).isVisible = selectedProblemsIds.size != 0
-                true
-            })
-        val layoutManager = LinearLayoutManager(this)
-        //val gridLayoutManager = GridLayoutManager(this, 2)
-        rvProblems.layoutManager = layoutManager
-        hideDialog()
-        
-    }
-
-    private fun openViewProblemActivity(problem: Problem) {
-
-        val intent = Intent(this, ViewProblemActivity::class.java)
-        MyApp.problemId = problem.id!!
-        intent.putExtra("PROBLEM", problem)
-        intent.putExtra("ORIGEM", "LISTA")
-        startActivity(intent)
-
-    }
-
-    private fun fillUserData(user: User) {
-
-        nav_view.getHeaderView(0).tvFullname.text = user.name
-        nav_view.getHeaderView(0).tvEmail.text = user.email
-        if (!user.avatar.isEmpty()) {
-            Glide.with(this).load(user.avatar).into(nav_view.getHeaderView(0).ivMyProfile)
-        } else {
-            nav_view.getHeaderView(0).ivMyProfile.setImageResource(R.drawable.fpo_avatar)
-        }
-        hideDialog()
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -180,10 +110,92 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            R.id.action_new -> openSaveProblem()
             R.id.action_logout -> confirmLogout()
             R.id.action_delete -> confirmDeleteProblems()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initializeMainViewModel() {
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+//        mainViewModel.loadingLiveData.observe(this, Observer<Boolean> {
+//            if(it!!) showDialog() else hideDialog()
+//        })
+        mainViewModel.deleteResponseStatusLiveData.observe(this, Observer<ResponseStatus> {
+            if(it!!.success) {
+                initializeListProblemsViewModel()
+                showLongSnack(it.message)
+            }
+        })
+    }
+
+    private fun listAll(list: ArrayList<Problem>) {
+
+        problems = list
+        // FUNCIONANDO
+        rvProblems.adapter = MainAdapter(this, list,
+            clickListener = { problem ->
+                openViewProblemActivity(problem)
+            },
+            longClickListener = { problem, selected ->
+                selectDeselectProblem(selected, problem)
+                true
+            },
+            shareClickListener = { problem ->
+                confirmShareProblemByEmail(problem)
+            })
+        val layoutManager = LinearLayoutManager(this)
+        //val gridLayoutManager = GridLayoutManager(this, 2)
+        rvProblems.layoutManager = layoutManager
+        hideDialog()
+        
+    }
+
+    private fun selectDeselectProblem(selected: Boolean, problem: Problem) {
+        if (selected) {
+            if (!selectedProblemsIds.contains(problem)) {
+                selectedProblemsIds.add(problem)
+            }
+        } else {
+            selectedProblemsIds.remove(problem)
+        }
+        menuAct.findItem(R.id.action_delete).isVisible = selectedProblemsIds.size != 0
+    }
+
+    private fun confirmShareProblemByEmail(problem: Problem) {
+        showActionDialog(getString(R.string.message_confirmation),
+                        getString(R.string.message_confirm_share_problem_by_whatsapp),
+                        onPositiveClick = {
+                            shareProblem(problem)
+                        })
+    }
+
+    private fun shareProblem(problem: Problem) {
+        mainViewModel.shareProblemByWhatsApp(this, problem)
+    }
+
+    private fun openViewProblemActivity(problem: Problem) {
+
+        val intent = Intent(this, ViewProblemActivity::class.java)
+        MyApp.problemId = problem.id!!
+        intent.putExtra("PROBLEM", problem)
+        intent.putExtra("ORIGEM", "LISTA")
+        startActivity(intent)
+
+    }
+
+    private fun fillUserData(user: User) {
+
+        nav_view.getHeaderView(0).tvFullname.text = user.name
+        nav_view.getHeaderView(0).tvEmail.text = user.email
+        if (!user.avatar.isEmpty()) {
+            Glide.with(this).load(user.avatar).into(nav_view.getHeaderView(0).ivMyProfile)
+        } else {
+            nav_view.getHeaderView(0).ivMyProfile.setImageResource(R.drawable.fpo_avatar)
+        }
+        hideDialog()
+
     }
 
     private fun confirmDeleteProblems() {
@@ -231,12 +243,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    private fun initializeFabButton() {
-        fab.setOnClickListener { view ->
-            val intent = Intent(this, SaveProblemActivity::class.java)
-            intent.putExtra("USER", MyApp.user!!.id!!)
-            startActivity(intent)
-        }
+//    private fun initializeFabButton() {
+//        fab.setOnClickListener { view ->
+//            val intent = Intent(this, SaveProblemActivity::class.java)
+//            intent.putExtra("USER", MyApp.user!!.id!!)
+//            startActivity(intent)
+//        }
+//    }
+
+    private fun openSaveProblem() {
+        val intent = Intent(this, SaveProblemActivity::class.java)
+        intent.putExtra("USER", MyApp.user!!.id!!)
+        startActivity(intent)
     }
 
     private fun initializeListProblemsViewModel() {

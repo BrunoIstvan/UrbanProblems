@@ -7,7 +7,7 @@ import android.widget.Toast
 import br.com.brunofernandowagner.R
 import dmax.dialog.SpotsDialog
 
-lateinit var dialog: AlertDialog
+var dialog: AlertDialog? = null
 
 fun AppCompatActivity.showShortToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 fun AppCompatActivity.showLongToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -66,17 +66,20 @@ fun AppCompatActivity.showActionDialog(
 }
 
 fun AppCompatActivity.showDialog() {
+    dialog?.let {
+        dialog = null
+    }
     dialog = SpotsDialog.Builder()
         .setContext(this)
         .setMessage(R.string.dialog_progress_title)
         .setCancelable(false)
         .build()
-        .apply {
-            show()
-        }
+    dialog?.show()
 }
 
 fun AppCompatActivity.hideDialog() {
-    if(::dialog.isInitialized)
-        dialog.dismiss()
+    dialog?.let {
+        it.dismiss()
+        dialog = null
+    }
 }

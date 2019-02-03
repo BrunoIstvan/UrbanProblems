@@ -90,5 +90,10 @@
     <string name="label_state">State</string>
     <string name="message_confirm_delete_selected_problem">Confirm that you want to delete selected Urban Problems?
     </string>
+    <string name="title_send_email">Send E-mail...</string>
+    <string name="message_confirm_share_problem_by_whatsapp">Confirm send problem by WhatsApp?</string>
+    <string name="title_developers">Developers</string>
+    <string name="message_take_picture">Capture or pick a picture from the problem you want to report</string>
+    <string name="action_new">New</string>
 
 </resources>

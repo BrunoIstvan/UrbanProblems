@@ -1,13 +1,19 @@
 package br.com.brunofernandowagner.views.main
 
+import android.app.Activity
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.content.Intent
 import android.os.AsyncTask
+import android.support.v4.content.FileProvider
+import android.util.Log
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.models.Problem
 import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
+import java.io.File
+
 
 class MainViewModel : ViewModel() {
 
@@ -21,6 +27,48 @@ class MainViewModel : ViewModel() {
         }
         deleteResponseStatusLiveData.value = ResponseStatus(true,
             AppCtx.getInstance().ctx!!.getString(R.string.message_delete_success))
+
+    }
+
+    fun shareProblemByWhatsApp(activity: Activity, problem: Problem) {
+
+        val whatsappIntent = Intent(Intent.ACTION_SEND)
+
+        whatsappIntent.type = "*/*"
+        whatsappIntent.setPackage("com.whatsapp")
+
+        // recupera o título do problema
+        var contentMessage = problem.title
+
+        // verifica se tem algum detalhe gravado
+        problem.detail?.let {
+            contentMessage += "\n\n" + it
+        }
+
+        // recupera a latitude e longitude
+        problem.longitude?.let { lon ->
+            problem.latitude?.let { lat ->
+                contentMessage += "\n\nhttp://maps.google.com/maps?q=" + lat + "," + lon + "&iwloc=A"
+            }
+        }
+
+        // informa todo o conteúdo no corpo da mensagem
+        whatsappIntent.putExtra(Intent.EXTRA_TEXT, contentMessage)
+
+        problem.photo?.let {
+            val photoURI = FileProvider.getUriForFile(
+                activity.applicationContext,
+        activity.applicationContext.packageName + ".br.com.brunofernandowagner",
+                File(problem.photo)
+            )
+            whatsappIntent.putExtra(Intent.EXTRA_STREAM, photoURI)
+        }
+
+        try {
+            activity.startActivity(whatsappIntent)
+        } catch (ex: android.content.ActivityNotFoundException) {
+            Log.e("SHARE", ex.message)
+        }
 
     }
 

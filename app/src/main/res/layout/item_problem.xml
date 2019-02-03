@@ -31,9 +31,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTitle" app:layout_constraintStart_toEndOf="@+id/ivProblem"
                 android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
-                app:layout_constraintTop_toTopOf="@+id/ivProblem" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="10dp" android:layout_marginRight="10dp" android:textSize="18sp"
-                android:textStyle="bold"/>
+                app:layout_constraintTop_toTopOf="@+id/ivProblem"
+                android:textSize="18sp"
+                android:textStyle="bold" android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/ibShareProblem" android:layout_marginRight="10dp"/>
+
         <TextView
                 android:text="TextView"
                 android:layout_width="0dp"
@@ -41,6 +43,20 @@
                 android:id="@+id/tvDetail" app:layout_constraintStart_toStartOf="@+id/tvTitle"
                 android:layout_marginTop="5dp" app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 app:layout_constraintEnd_toEndOf="@+id/tvTitle"/>
+
+        <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_whatsapp"
+                android:id="@+id/ibShareProblem"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@android:color/transparent" android:scaleType="centerInside"/>
 
 
     </android.support.constraint.ConstraintLayout>

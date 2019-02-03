@@ -120,6 +120,7 @@ class SignInActivity : AppCompatActivity() {
 
     private var loadingObserver = Observer<Boolean> {
         if(it == true) {
+            hideDialog()
             showDialog()
         } else {
             hideDialog()
