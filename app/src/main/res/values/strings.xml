@@ -95,5 +95,6 @@
     <string name="title_developers">Developers</string>
     <string name="message_take_picture">Capture or pick a picture from the problem you want to report</string>
     <string name="action_new">New</string>
+    <string name="title_version">Version</string>
 
 </resources>
