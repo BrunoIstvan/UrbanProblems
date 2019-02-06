@@ -32,42 +32,42 @@ class MainViewModel : ViewModel() {
 
     fun shareProblemByWhatsApp(activity: Activity, problem: Problem) {
 
-        val whatsappIntent = Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "*/*"
+            setPackage("com.whatsapp")
 
-        whatsappIntent.type = "*/*"
-        whatsappIntent.setPackage("com.whatsapp")
+            // recupera o título do problema
+            var contentMessage = problem.title
 
-        // recupera o título do problema
-        var contentMessage = problem.title
-
-        // verifica se tem algum detalhe gravado
-        problem.detail?.let {
-            contentMessage += "\n\n" + it
-        }
-
-        // recupera a latitude e longitude
-        problem.longitude?.let { lon ->
-            problem.latitude?.let { lat ->
-                contentMessage += "\n\nhttp://maps.google.com/maps?q=" + lat + "," + lon + "&iwloc=A"
+            // verifica se tem algum detalhe gravado
+            problem.detail?.let {
+                contentMessage += "\n\n" + it
             }
-        }
 
-        // informa todo o conteúdo no corpo da mensagem
-        whatsappIntent.putExtra(Intent.EXTRA_TEXT, contentMessage)
+            // recupera a latitude e longitude
+            problem.longitude?.let { lon ->
+                problem.latitude?.let { lat ->
+                    contentMessage += "\n\nhttp://maps.google.com/maps?q=" + lat + "," + lon + "&iwloc=A"
+                }
+            }
 
-        problem.photo?.let {
-            val photoURI = FileProvider.getUriForFile(
-                activity.applicationContext,
-        activity.applicationContext.packageName + ".br.com.brunofernandowagner",
-                File(problem.photo)
-            )
-            whatsappIntent.putExtra(Intent.EXTRA_STREAM, photoURI)
-        }
+            // informa todo o conteúdo no corpo da mensagem
+            putExtra(Intent.EXTRA_TEXT, contentMessage)
 
-        try {
-            activity.startActivity(whatsappIntent)
-        } catch (ex: android.content.ActivityNotFoundException) {
-            Log.e("SHARE", ex.message)
+            problem.photo?.let {
+                val photoURI = FileProvider.getUriForFile(
+                    activity.applicationContext,
+                    activity.applicationContext.packageName + ".br.com.brunofernandowagner",
+                    File(problem.photo)
+                )
+                putExtra(Intent.EXTRA_STREAM, photoURI)
+            }
+
+            try {
+                activity.startActivity(this)
+            } catch (ex: android.content.ActivityNotFoundException) {
+                Log.e("SHARE", ex.message)
+            }
         }
 
     }

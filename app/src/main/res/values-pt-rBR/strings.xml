@@ -88,7 +88,7 @@
         selecionados?
     </string>
     <string name="title_send_email">Enviar E-mail</string>
-    <string name="message_confirm_share_problem_by_whatsapp">Confirma o envio do problema por E-mail?</string>
+    <string name="message_confirm_share_problem_by_whatsapp">Confirma compartilhar o problema por WhatsApp?</string>
     <string name="title_developers">Desenvolvedores</string>
     <string name="message_take_picture">Capture ou selecione uma foto do problema que você quer reportar</string>
     <string name="action_new">Novo</string>

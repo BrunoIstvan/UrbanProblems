@@ -1,5 +1,6 @@
 package br.com.brunofernandowagner.views.maps
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import br.com.brunofernandowagner.R
@@ -9,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -46,6 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if(::problems.isInitialized) {
 
+            var lastPoint: LatLng? = null
             for(prob in problems) {
 
                 if(prob.latitude != null && prob.latitude != 0.0 &&
@@ -54,9 +57,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val point = LatLng(prob.latitude!!, prob.longitude!!)
                     mMap.addMarker(MarkerOptions().position(point).title(prob.title))
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(point))
+                    lastPoint = point
                 }
 
             }
+
+            val circulo = CircleOptions()
+            circulo.center(lastPoint!!)
+            circulo.radius(1000.0)
+            circulo.fillColor(Color.argb(128, 0, 51,102))
+            circulo.strokeWidth(1f)
+            mMap.addCircle(circulo)
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 12f))
 
         }
 

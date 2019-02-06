@@ -22,87 +22,83 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
             android:text="@string/app_name"
-            android:textSize="50sp"
+            android:textSize="40sp"
             android:textColor="@android:color/black"/>
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="180dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="220dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/title_developers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:textSize="30sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"/>
 
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="220dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="190dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Bruno I. C. Monteiro (RM: 331122)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDev1"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@android:color/black"/>
 
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="250dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Fernando"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="170dp"
+            android:text="Fernando N. Silva (RM: 330161)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDev2"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textSize="16sp"
+            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
 
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="280dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Wágner"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:text="Wagner Rodrigues (RM: 331769)"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDev3"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textSize="16sp"
+            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
 
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="380dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="70dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/title_version"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewVersion"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black"/>
 
 
     <TextView
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="420dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="2.0"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:text="1.0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewVersionValue"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textSize="16sp"
+            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
 
 </RelativeLayout>

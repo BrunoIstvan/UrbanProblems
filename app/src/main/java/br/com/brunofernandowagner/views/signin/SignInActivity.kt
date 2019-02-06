@@ -112,7 +112,7 @@ class SignInActivity : AppCompatActivity() {
 
     private var responseStatusObserver = Observer<ResponseStatus> {
         if(it!!.success) {
-            showLongToast(it.message)
+            //showLongToast(it.message)
         } else {
             showLongSnack(it.message)
         }
