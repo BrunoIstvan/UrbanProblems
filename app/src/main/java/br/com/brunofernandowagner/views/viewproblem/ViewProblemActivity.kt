@@ -48,6 +48,13 @@ class ViewProblemActivity : AppCompatActivity() {
                 finish()
             }
         })
+        viewProblemViewModel.problem.observe(this, Observer { prob ->
+            prob?.let {
+                fillProblemData(it)
+            } ?: run {
+                finish()
+            }
+        })
 
     }
 
@@ -69,17 +76,7 @@ class ViewProblemActivity : AppCompatActivity() {
         } else {
 
             MyApp.problemId = problem.id!!
-            ViewModelProviders.of(this)
-                .get(ViewProblemViewModel::class.java)
-                .problem
-                .observe(this,
-                    Observer<Problem> {
-                        if(it == null) {
-                            finish()
-                        } else {
-                            fillProblemData(it!!)
-                        }
-                    })
+            getProblemById()
 
         }
 
@@ -87,6 +84,24 @@ class ViewProblemActivity : AppCompatActivity() {
             userId = intent.getStringExtra("USER")
         }
 
+    }
+
+    private fun getProblemById() {
+
+        viewProblemViewModel.getProblemById(MyApp.problemId)
+        /*
+        ViewModelProviders.of(this)
+            .get(ViewProblemViewModel::class.java)
+            .problem
+            .observe(this,
+                Observer<Problem> {
+                    if(it == null) {
+                        finish()
+                    } else {
+                        fillProblemData(it!!)
+                    }
+                })
+        */
     }
 
     private fun fillProblemData(problem: Problem) {

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Intent
-import android.os.AsyncTask
 import android.support.v4.content.FileProvider
 import android.util.Log
 import br.com.brunofernandowagner.R
@@ -13,6 +12,7 @@ import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
 import java.io.File
+import java.util.concurrent.Executors
 
 
 class MainViewModel : ViewModel() {
@@ -23,7 +23,10 @@ class MainViewModel : ViewModel() {
     fun removeProblems(list: ArrayList<Problem>) {
 
         for(prob in list) {
-            RemoveAsyncTask(db).execute(prob)
+            Executors.newSingleThreadExecutor().execute {
+                db.problemDAO().remove(prob)
+            }
+            //RemoveAsyncTask(db).execute(prob)
         }
         deleteResponseStatusLiveData.value = ResponseStatus(true,
             AppCtx.getInstance().ctx!!.getString(R.string.message_delete_success))
@@ -72,6 +75,7 @@ class MainViewModel : ViewModel() {
 
     }
 
+    /*
     companion object {
 
         private class RemoveAsyncTask internal
@@ -83,5 +87,6 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+    */
 
 }

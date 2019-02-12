@@ -10,17 +10,21 @@ import br.com.brunofernandowagner.models.Problem
 import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
+import java.util.concurrent.Executors
 
 class ViewProblemViewModel : ViewModel() {
 
     private val db = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
-    lateinit var problem: LiveData<Problem>
+    // lateinit var problem: LiveData<Problem>
+    var problem: LiveData<Problem> = MutableLiveData<Problem>()
     var loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     var responseDeleteLiveData: MutableLiveData<ResponseStatus> = MutableLiveData()
 
+    /*
     init {
         getProblemById(MyApp.problemId)
     }
+    */
 
     fun getProblemById(id: Int) {
 
@@ -31,13 +35,17 @@ class ViewProblemViewModel : ViewModel() {
     fun deleteProblem(problem: Problem) {
 
         loadingLiveData.value = true
-        DeleteAsyncTask(db!!).execute(problem)
+        Executors.newSingleThreadExecutor().execute {
+            db.problemDAO().remove(problem)
+        }
+        //DeleteAsyncTask(db!!).execute(problem)
         responseDeleteLiveData.value = ResponseStatus(true,
             AppCtx.getInstance().ctx!!.getString(R.string.message_delete_success))
         loadingLiveData.value = false
 
     }
 
+    /*
     private inner class DeleteAsyncTask internal
     constructor(appDatabase: DatabaseProblem) : AsyncTask<Problem, Void, String>() {
         private val db: DatabaseProblem = appDatabase
@@ -46,5 +54,6 @@ class ViewProblemViewModel : ViewModel() {
             return ""
         }
     }
+    */
 
 }

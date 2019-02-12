@@ -62,16 +62,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             }
 
-            val circulo = CircleOptions()
-            circulo.center(lastPoint!!)
-            circulo.radius(1000.0)
-            circulo.fillColor(Color.argb(128, 0, 51,102))
-            circulo.strokeWidth(1f)
-            mMap.addCircle(circulo)
+            lastPoint?.let {
+                val circulo = CircleOptions()
+                circulo.center(lastPoint!!)
+                circulo.radius(1000.0)
+                circulo.fillColor(Color.argb(128, 0, 51, 102))
+                circulo.strokeWidth(1f)
+                mMap.addCircle(circulo)
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 12f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 12f))
+            }
 
         }
 
     }
+
 }

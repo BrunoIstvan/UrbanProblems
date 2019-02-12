@@ -2,7 +2,6 @@ package br.com.brunofernandowagner.views.saveproblem
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.os.AsyncTask
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.models.GeoLocation
 import br.com.brunofernandowagner.models.Problem
@@ -10,6 +9,7 @@ import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.persistences.DatabaseProblem
 import br.com.brunofernandowagner.utils.AppCtx
 import com.google.android.gms.maps.model.LatLng
+import java.util.concurrent.Executors
 
 class SaveProblemViewModel : ViewModel() {
 
@@ -44,12 +44,22 @@ class SaveProblemViewModel : ViewModel() {
         db = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
 
         problem.id?.let {
+            Executors.newSingleThreadExecutor().execute {
+                db.problemDAO().update(problem)
+            }
+            /*
             UpdateAsyncTask(db).execute(problem)
+            */
             loadingLiveData.value = false
             updateResponseStatusLiveData.value = ResponseStatus(true,
                 AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
         } ?: run {
+            Executors.newSingleThreadExecutor().execute {
+                db.problemDAO().insert(problem)
+            }
+            /*
             InsertAsyncTask(db).execute(problem)
+            */
             loadingLiveData.value = false
             updateResponseStatusLiveData.value = ResponseStatus(true,
                 AppCtx.getInstance().ctx!!.getString(R.string.message_save_problem_success))
@@ -63,6 +73,7 @@ class SaveProblemViewModel : ViewModel() {
 
     fun setImagePath(imagePath: String) { this.imagePathLiveData.value = imagePath }
 
+    /*
     companion object {
 
         private class InsertAsyncTask internal
@@ -89,5 +100,6 @@ class SaveProblemViewModel : ViewModel() {
 
         }
     }
+    */
 
 }

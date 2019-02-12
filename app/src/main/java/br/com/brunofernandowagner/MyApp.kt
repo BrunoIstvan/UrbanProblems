@@ -39,7 +39,7 @@ class MyApp : Application() {
                 // Log and toast
                 //val msg = getString(R.string.msg_token_fmt, token)
                 Log.d("GEN_TOKEN", token)
-                Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
             })
         // [END retrieve_current_token]
 
