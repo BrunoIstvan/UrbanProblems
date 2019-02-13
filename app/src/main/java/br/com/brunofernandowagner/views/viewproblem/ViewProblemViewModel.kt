@@ -24,7 +24,7 @@ class ViewProblemViewModel : ViewModel() {
     }
 
 
-    fun getProblemById(id: Int) {
+    private fun getProblemById(id: Int) {
 
         problem = db.problemDAO().getProblemById(id)
 

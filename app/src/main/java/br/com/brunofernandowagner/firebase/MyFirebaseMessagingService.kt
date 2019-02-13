@@ -1,9 +1,6 @@
 package br.com.brunofernandowagner.firebase
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.util.Log
-import br.com.brunofernandowagner.views.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 

@@ -67,10 +67,12 @@ class SaveProblemActivity : AppCompatActivity() {
         saveProblemViewModel.problemLiveData.observe(this, Observer<Problem> {
             fillProblemData(it!!)
         })
-        saveProblemViewModel.geoLocationLiveData.observe(this, Observer<GeoLocation> {
-            fillProblemLocation(it)
-            val myLocation = LatLng(it?.latitude!!, it?.longitude!!)
-            fillAddress(myLocation)
+        saveProblemViewModel.geoLocationLiveData.observe(this, Observer<GeoLocation> { loc ->
+            fillProblemLocation(loc)
+            loc?.let {
+                val myLocation = LatLng(it.latitude!!, it.longitude!!)
+                fillAddress(myLocation)
+            }
         })
         saveProblemViewModel.latLngLiveData.observe(this, Observer<LatLng> {
             fillAddress(it!!)
@@ -84,10 +86,10 @@ class SaveProblemActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if(intent.hasExtra("PROBLEM")) {
-            problem = intent.getParcelableExtra("PROBLEM")
+        problem = if(intent.hasExtra("PROBLEM")) {
+            intent.getParcelableExtra("PROBLEM")
         } else {
-            problem = Problem()
+            Problem()
         }
         saveProblemViewModel.setProblem(problem)
 

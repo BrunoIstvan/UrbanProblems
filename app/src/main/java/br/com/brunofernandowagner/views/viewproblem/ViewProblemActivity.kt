@@ -65,14 +65,16 @@ class ViewProblemActivity : AppCompatActivity() {
             problem = intent.getParcelableExtra("PROBLEM")
         }
 
-        if(intent.hasExtra("ORIGEM")) {
-            origem = intent.getStringExtra("ORIGEM")
+        origem = if(intent.hasExtra("ORIGEM")) {
+            intent.getStringExtra("ORIGEM")
         } else {
-            origem = ""
+            ""
         }
         if(origem == "LISTA") {
+
             fillProblemData(problem)
             intent.removeExtra("ORIGEM")
+
         } else {
 
             MyApp.problemId = problem.id!!
@@ -98,7 +100,7 @@ class ViewProblemActivity : AppCompatActivity() {
                     if(it == null) {
                         finish()
                     } else {
-                        fillProblemData(it!!)
+                        fillProblemData(it)
                     }
                 })
 
@@ -113,7 +115,7 @@ class ViewProblemActivity : AppCompatActivity() {
         } else {
             Glide.with(this).load(R.drawable.no_cover_available).into(ivProblem)
         }
-        var completeAddress: String = "\n"
+        var completeAddress = "\n"
         if(!problem.address.isNullOrEmpty()) {
             completeAddress += "${getString(R.string.label_address)}: ${problem.address}\n"
         }
@@ -163,7 +165,7 @@ class ViewProblemActivity : AppCompatActivity() {
 
     private fun confirmDelete() {
 
-        showActionDialog(getString(R.string.message_confirmation),
+        showActionDialog(getString(R.string.message_deleting),
             getString(R.string.message_confirm_delete_problem),
             onPositiveClick = { delete() })
 

@@ -2,15 +2,12 @@ package br.com.brunofernandowagner
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.utils.AppCtx
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
 
-
-//import com.google.firebase.FirebaseApp
 
 class MyApp : Application() {
 

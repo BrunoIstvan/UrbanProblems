@@ -63,12 +63,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             lastPoint?.let {
-                val circulo = CircleOptions()
-                circulo.center(lastPoint!!)
-                circulo.radius(1000.0)
-                circulo.fillColor(Color.argb(128, 0, 51, 102))
-                circulo.strokeWidth(1f)
-                mMap.addCircle(circulo)
+                val circle = CircleOptions()
+                circle.center(it)
+                circle.radius(1000.0)
+                circle.fillColor(Color.argb(128, 0, 51, 102))
+                circle.strokeWidth(1f)
+                mMap.addCircle(circle)
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastPoint, 12f))
             }

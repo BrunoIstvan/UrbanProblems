@@ -70,16 +70,16 @@ class SignUpViewModel : ViewModel() {
 
                     // enviar para ser cadastrado
                     userRepository.signUp(user,
-                        onComplete = {
+                        onComplete = { user ->
 
                             loading.value = false
-                            authResponseStatus.value = ResponseStatus(true, it!!.id!!)
+                            authResponseStatus.value = ResponseStatus(true, user!!.id!!)
 
                         },
-                        onError = {
+                        onError = { error ->
 
                             loading.value = false
-                            authResponseStatus.value = ResponseStatus(false, it!!)
+                            authResponseStatus.value = ResponseStatus(false, error!!)
 
                         })
 

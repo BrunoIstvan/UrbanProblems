@@ -16,8 +16,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var signUpViewModel: SignUpViewModel
 
-    private lateinit var uid: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -38,10 +36,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private var saveUserStatusObserver = Observer<ResponseStatus> {
         if(it!!.success) {
-            showLongToast(it!!.message)
+            showLongToast(it.message)
             finish()
         } else {
-            showLongSnack(it!!.message)
+            showLongSnack(it.message)
         }
     }
 
@@ -51,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
             showLongToast(getString(R.string.message_signup_success))
             finish()
         } else {
-            showLongSnack(it!!.message)
+            showLongSnack(it.message)
         }
     }
 

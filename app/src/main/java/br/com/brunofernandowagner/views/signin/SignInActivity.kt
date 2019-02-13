@@ -6,14 +6,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import br.com.brunofernandowagner.MyApp
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.extensions.hideDialog
 import br.com.brunofernandowagner.extensions.showDialog
 import br.com.brunofernandowagner.extensions.showLongSnack
-import br.com.brunofernandowagner.extensions.showLongToast
 import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.views.main.MainActivity
@@ -58,20 +57,20 @@ class SignInActivity : AppCompatActivity() {
         // prepara o serviço de shared preferences
         sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE)
 
-        sharedPreferences?.let {
+        sharedPreferences?.let { shared ->
             // se foi armazenado anteriormente para manter conectado...
-            if(it.getBoolean("MANTER_CONECTADO", false)) {
+            if(shared.getBoolean("MANTER_CONECTADO", false)) {
 
                 chkKeepConnected.isChecked = true
 
                 // verificar se o id do usuário está preenchido
-                if(it.getString("USUARIO", "").isNotEmpty()) {
+                if(shared.getString("USUARIO", "").isNotEmpty()) {
 
                     // recuperar
                     val uid = sharedPreferences.getString("USUARIO", "")
 
                     // executar a busca pelo usuário que quer se manter conectado...
-                    signInViewModel.getUserByUid(uid)
+                    signInViewModel.getUserByUid(uid!!)
 
                 }
 
@@ -91,9 +90,9 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-    private var userObserver = Observer<User> {
+    private var userObserver = Observer<User> { user ->
 
-        it?.let {
+        user?.let {
 
             showDialog()
             val editor = sharedPreferences.edit()
@@ -101,7 +100,7 @@ class SignInActivity : AppCompatActivity() {
             editor.putString("USUARIO", it.id)
             editor.apply()
 
-            MyApp.user = it!!
+            MyApp.user = it
             startActivity(Intent(this, MainActivity::class.java))
             hideDialog()
             finish()

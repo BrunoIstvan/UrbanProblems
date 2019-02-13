@@ -53,7 +53,7 @@ class MyProfileActivity : AppCompatActivity() {
 
     private var uploadResponseStatusObserver = Observer<ResponseStatus> {
         if(it?.success == true) {
-            showShortSnack(it!!.message)
+            showShortSnack(it.message)
             hideDialog()
         } else {
             showLongSnack(it!!.message)

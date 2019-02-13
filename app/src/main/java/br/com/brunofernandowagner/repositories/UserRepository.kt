@@ -25,7 +25,7 @@ class UserRepository {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     if(response.isSuccessful) {
-                        onComplete(response?.body())
+                        onComplete(response.body())
                     } else {
                         onError( AppCtx.getInstance().ctx?.getString(R.string.message_error_save_data) )
                     }
@@ -51,7 +51,7 @@ class UserRepository {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     if(response.isSuccessful) {
-                        onComplete(response?.body())
+                        onComplete(response.body())
                     } else {
                         onError( AppCtx.getInstance().ctx?.getString(R.string.error_sign_up) )
                     }
@@ -77,7 +77,7 @@ class UserRepository {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     if(response.isSuccessful) {
-                        onComplete(response?.body())
+                        onComplete(response.body())
                     } else {
                         onError( AppCtx.getInstance().ctx?.getString(R.string.error_sign_in) )
                     }
@@ -103,7 +103,7 @@ class UserRepository {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     if(response.isSuccessful) {
-                        onComplete(response?.body())
+                        onComplete(response.body())
                     } else {
                         onError( AppCtx.getInstance().ctx?.getString(R.string.error_get_by_id) )
                     }
@@ -129,7 +129,7 @@ class UserRepository {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     if(response.isSuccessful) {
-                        onComplete(response?.body())
+                        onComplete(response.body())
                     } else {
                         onComplete(User(id = ""))
                     }

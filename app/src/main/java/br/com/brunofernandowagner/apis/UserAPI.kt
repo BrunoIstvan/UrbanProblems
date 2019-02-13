@@ -3,7 +3,6 @@ package br.com.brunofernandowagner.apis
 import br.com.brunofernandowagner.models.User
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface UserAPI {
 

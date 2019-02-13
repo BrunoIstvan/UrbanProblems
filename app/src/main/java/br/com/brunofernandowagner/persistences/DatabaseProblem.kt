@@ -8,14 +8,14 @@ import br.com.brunofernandowagner.dao.ProblemDAO
 import br.com.brunofernandowagner.models.Problem
 
 
-@Database(entities = arrayOf(Problem::class), version = 1)
+@Database(entities = [Problem::class], version = 1)
 abstract class DatabaseProblem : RoomDatabase() {
 
     abstract fun problemDAO(): ProblemDAO
 
     companion object {
 
-        var INSTANCE: DatabaseProblem? = null
+        private var INSTANCE: DatabaseProblem? = null
 
         fun getDatabase(context: Context) : DatabaseProblem? {
 

@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun confirmDeleteProblems() {
 
-        showActionDialog(getString(R.string.message_confirmation),
+        showActionDialog(getString(R.string.message_deleting),
             getString(R.string.message_confirm_delete_selected_problem),
             onPositiveClick = { deleteProblems() })
 

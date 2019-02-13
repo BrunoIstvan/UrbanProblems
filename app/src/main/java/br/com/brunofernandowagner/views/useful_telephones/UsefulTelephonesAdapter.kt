@@ -48,7 +48,7 @@ class UsefulTelephonesAdapter(
             val tvTelephoneNumber = tvTelephoneNumber
 
             tvTelephoneName.text = telephone.name
-            tvTelephoneNumber.text = telephone.number.toString()
+            tvTelephoneNumber.text = telephone.number
             Glide.with(this).load(telephone.image).into(ivUsefulTelephone)
             setOnClickListener { listener(telephone) }
 

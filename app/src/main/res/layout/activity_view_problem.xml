@@ -73,7 +73,7 @@
 
                 <View
                         android:layout_below="@+id/rlAddress"
-                        android:id="@+id/divider"
+                        android:id="@+id/divider2"
                         android:layout_width="match_parent"
                         android:layout_height="2px"
                         android:background="#E1E1E1"

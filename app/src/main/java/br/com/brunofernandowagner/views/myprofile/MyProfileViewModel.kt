@@ -3,7 +3,6 @@ package br.com.brunofernandowagner.views.myprofile
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import br.com.brunofernandowagner.R
-import br.com.brunofernandowagner.UploadFile
 import br.com.brunofernandowagner.models.ResponseStatus
 import br.com.brunofernandowagner.models.User
 import br.com.brunofernandowagner.repositories.UserRepository

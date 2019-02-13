@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
 
     fun shareProblemByWhatsApp(activity: Activity, problem: Problem) {
 
-        val intent = Intent(Intent.ACTION_SEND).apply {
+        Intent(Intent.ACTION_SEND).apply {
             type = "*/*"
             setPackage("com.whatsapp")
 
@@ -50,11 +50,11 @@ class MainViewModel : ViewModel() {
             // recupera a latitude e longitude
             problem.longitude?.let { lon ->
                 problem.latitude?.let { lat ->
-                    contentMessage += "\n\nhttp://maps.google.com/maps?q=" + lat + "," + lon + "&iwloc=A"
+                    contentMessage += "\n\nhttp://maps.google.com/maps?q=$lat,$lon&iwloc=A"
                 }
             }
 
-            // informa todo o conteúdo no corpo da mensagem
+            // informa o conteúdo completo no corpo da mensagem
             putExtra(Intent.EXTRA_TEXT, contentMessage)
 
             problem.photo?.let {

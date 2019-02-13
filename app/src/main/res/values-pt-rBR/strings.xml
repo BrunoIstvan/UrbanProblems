@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Mapa</string>
 
     <string name="app_name">Problemas Urbanos</string>
     <string name="title_splashscreen">Tela Inicial</string>
@@ -93,5 +93,10 @@
     <string name="message_take_picture">Capture ou selecione uma foto do problema que você quer reportar</string>
     <string name="action_new">Novo</string>
     <string name="title_version">Version</string>
+    <string name="navigation_drawer_close">Fechar navegação</string>
+    <string name="navigation_drawer_open">Abrir navegação</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_map_problems">Mapa</string>
+    <string name="message_deleting">Exclusão</string>
 
 </resources>
