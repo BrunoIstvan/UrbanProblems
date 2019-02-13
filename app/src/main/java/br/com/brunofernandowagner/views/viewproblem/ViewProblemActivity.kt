@@ -88,8 +88,8 @@ class ViewProblemActivity : AppCompatActivity() {
 
     private fun getProblemById() {
 
-        viewProblemViewModel.getProblemById(MyApp.problemId)
-        /*
+        //viewProblemViewModel.getProblemById(MyApp.problemId)
+
         ViewModelProviders.of(this)
             .get(ViewProblemViewModel::class.java)
             .problem
@@ -101,7 +101,7 @@ class ViewProblemActivity : AppCompatActivity() {
                         fillProblemData(it!!)
                     }
                 })
-        */
+
     }
 
     private fun fillProblemData(problem: Problem) {

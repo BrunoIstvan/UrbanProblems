@@ -3,7 +3,6 @@ package br.com.brunofernandowagner.views.viewproblem
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.os.AsyncTask
 import br.com.brunofernandowagner.MyApp
 import br.com.brunofernandowagner.R
 import br.com.brunofernandowagner.models.Problem
@@ -15,16 +14,15 @@ import java.util.concurrent.Executors
 class ViewProblemViewModel : ViewModel() {
 
     private val db = DatabaseProblem.getDatabase(AppCtx.getInstance().ctx!!)!!
-    // lateinit var problem: LiveData<Problem>
-    var problem: LiveData<Problem> = MutableLiveData<Problem>()
+    lateinit var problem: LiveData<Problem>
     var loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     var responseDeleteLiveData: MutableLiveData<ResponseStatus> = MutableLiveData()
 
-    /*
+
     init {
         getProblemById(MyApp.problemId)
     }
-    */
+
 
     fun getProblemById(id: Int) {
 
