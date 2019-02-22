@@ -144,6 +144,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             },
             shareClickListener = { problem ->
                 confirmShareProblemByEmail(problem)
+            },
+            deleteClickListener = { problem ->
+                showActionDialog(problem.title!!,
+                    getString(R.string.message_confirm_delete_problem),
+                    onPositiveClick = {
+                        showDialog()
+                        mainViewModel.deleteProblem(problem)
+                        hideDialog()
+                    })
             })
         val layoutManager = LinearLayoutManager(this)
         //val gridLayoutManager = GridLayoutManager(this, 2)

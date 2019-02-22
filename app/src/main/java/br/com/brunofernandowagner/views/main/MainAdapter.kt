@@ -17,14 +17,15 @@ class MainAdapter(
     private val myProblems: List<Problem>,
     private val clickListener: (Problem) -> Unit,
     private val longClickListener: (Problem, Boolean) -> Boolean,
-    private val shareClickListener: (Problem) -> Unit
+    private val shareClickListener: (Problem) -> Unit,
+    private val deleteClickListener: (Problem) -> Unit
 
 ) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val problem = myProblems[position]
-        holder.bindView(problem, clickListener, longClickListener, shareClickListener)
+        holder.bindView(problem, clickListener, longClickListener, shareClickListener, deleteClickListener)
 
     }
 
@@ -46,19 +47,28 @@ class MainAdapter(
         fun bindView(problem: Problem,
                      clickListener: (Problem) -> Unit,
                      longClickListener: (Problem, Boolean) -> Boolean,
-                     shareClickListener: (Problem) -> Unit) = with(itemView) {
+                     shareClickListener: (Problem) -> Unit,
+                     deleteClickListener: (Problem) -> Unit) = with(itemView) {
 
             val ivProblem = ivProblem
             val ibShareProblem = ibShareProblem
             val tvTitle = tvTitle
-            val tvDetail = tvDetail
+            //val tvDetail = tvDetail
+            val tvCityState = tvCityState
 
             tvTitle.text = problem.title
-            problem.detail?.let {
-                tvDetail.text = if (problem.detail.toString().length > 50) {
-                    problem.detail.toString().substring(0, 49) } else { problem.detail.toString() }
+
+            //problem.detail?.let {
+            //    tvDetail.text = if (problem.detail.toString().length > 50) {
+            //        problem.detail.toString().substring(0, 49) } else { problem.detail.toString() }
+            //} ?: run {
+            //    tvDetail.text = ""
+            //}
+
+            problem.city?.let {
+                tvCityState.text = "$it / ${problem.state}"
             } ?: run {
-                tvDetail.text = ""
+                tvCityState.text = ""
             }
 
             if(problem.photo.isNullOrEmpty()) {
@@ -80,6 +90,7 @@ class MainAdapter(
                 }
             }
             ibShareProblem.setOnClickListener { shareClickListener(problem) }
+            ibDeleteProblem.setOnClickListener { deleteClickListener(problem) }
 
         }
 

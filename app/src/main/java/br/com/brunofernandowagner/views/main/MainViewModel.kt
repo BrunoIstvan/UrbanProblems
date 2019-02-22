@@ -75,6 +75,17 @@ class MainViewModel : ViewModel() {
 
     }
 
+    fun deleteProblem(problem: Problem) {
+
+        Executors.newSingleThreadExecutor().execute {
+            db.problemDAO().remove(problem)
+        }
+        //DeleteAsyncTask(db!!).execute(problem)
+        deleteResponseStatusLiveData.value = ResponseStatus(true,
+            AppCtx.getInstance().ctx!!.getString(R.string.message_delete_success))
+
+    }
+
     /*
     companion object {
 
