@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Urban Problems</string>
+    <string name="app_name">Urban problems</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="title_splashscreen">Initial Screen</string>
@@ -29,7 +29,7 @@
     <string name="message_input_name">Input your fullname</string>
     <string name="message_signup_success">Registration successfully completed</string>
     <string name="message_password_not_confirmed">Password confirmation is invalid</string>
-    <string name="nav_problems_location">Problems location</string>
+    <string name="nav_problems_location">Map of problems</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>

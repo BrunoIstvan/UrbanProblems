@@ -48,59 +48,33 @@
                     android:gravity="center_vertical|center_horizontal">
 
                 <TextView
-                        android:layout_gravity="center_horizontal"
                         android:text="@string/hint_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        style="@style/tv_title_profile"/>
 
                 <TextView
-                        android:layout_marginEnd="30dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_gravity="center_horizontal"
+                        style="@style/tv_value_profile"
                         android:text="@string/hint_name"
-                        android:textAlignment="center"
-                        android:textSize="22sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/tvFullname"/>
 
 
                 <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal"
                         android:text="@string/hint_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        style="@style/tv_title_profile"/>
 
                 <TextView
-                        android:layout_marginEnd="30dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
-                        android:textSize="22sp"
                         android:text="@string/hint_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/tv_value_profile"
                         android:id="@+id/tvEmail"/>
 
 
                 <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal"
                         android:text="@string/hint_date_creation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        style="@style/tv_title_profile"/>
 
                 <TextView
-                        android:layout_marginEnd="30dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_gravity="center_horizontal"
-                        android:textAlignment="center"
-                        android:textSize="22sp"
-                        android:text="@string/hint_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvDateRegistration"/>
+                        android:text="@string/hint_date_creation"
+                        android:id="@+id/tvDateRegistration"
+                        style="@style/tv_value_profile"/>
 
 
             </LinearLayout>

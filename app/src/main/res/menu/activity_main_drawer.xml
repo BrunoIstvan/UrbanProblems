@@ -26,6 +26,10 @@
         <item   android:id="@+id/menu_about_app"
                 android:icon="@drawable/ic_about"
                 android:title="@string/nav_about"/>
+    </group>
+
+    <group android:id="@+id/group_exit"
+           android:checkableBehavior="none">
 
         <item   android:id="@+id/menu_logout"
                 android:icon="@drawable/ic_exit"

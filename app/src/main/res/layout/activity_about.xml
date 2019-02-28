@@ -8,101 +8,44 @@
         tools:context=".views.about.AboutActivity">
 
     <ImageView
-            android:alpha=".2"
             android:id="@+id/ivLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/hole_street"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"/>
+            style="@style/iv_bg_about"/>
 
     <TextView
             android:id="@+id/textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="150dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_centerHorizontal="true"
             android:text="@string/app_name"
-            android:textSize="40sp"
-            android:textColor="@android:color/black"/>
+            style="@style/tv_title_about"/>
 
     <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="220dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:text="@string/title_developers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
+            android:layout_marginBottom="220dp"
+            style="@style/tv_bold_20"/>
 
 
     <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="190dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:text="Bruno I. C. Monteiro (RM: 331122)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewDev1"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"/>
-
+            android:layout_marginBottom="190dp"
+            style="@style/tv_about_common" />
 
     <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="170dp"
             android:text="Fernando N. Silva (RM: 330161)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewDev2"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
+            style="@style/tv_about_common"
+            android:layout_marginBottom="170dp" />
 
 
     <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="150dp"
             android:text="Wagner Rodrigues (RM: 331769)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewDev3"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
-
+            android:layout_marginBottom="150dp"
+            style="@style/tv_about_common" />
 
     <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="70dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            style="@style/tv_bold_20"
             android:text="@string/title_version"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewVersion"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
-
+            android:layout_marginBottom="70dp" />
 
     <TextView
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
-            android:text="1.0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewVersionValue"
-            android:textSize="16sp"
-            android:textColor="@android:color/black" android:layout_centerInParent="true"/>
+            style="@style/tv_about_common"
+            android:text="1.0" />
 
 </RelativeLayout>

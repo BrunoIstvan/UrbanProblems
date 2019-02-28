@@ -53,7 +53,7 @@ class MainAdapter(
             val ivProblem = ivProblem
             val ibShareProblem = ibShareProblem
             val tvTitle = tvTitle
-            //val tvDetail = tvDetail
+            val tvDate = tvDate
             val tvCityState = tvCityState
 
             tvTitle.text = problem.title
@@ -65,10 +65,14 @@ class MainAdapter(
             //    tvDetail.text = ""
             //}
 
+            tvDate.text = ""
+            problem.datetime?.let {
+                tvDate.text = it
+            }
+
+            tvCityState.text = ""
             problem.city?.let {
                 tvCityState.text = "$it / ${problem.state}"
-            } ?: run {
-                tvCityState.text = ""
             }
 
             if(problem.photo.isNullOrEmpty()) {
