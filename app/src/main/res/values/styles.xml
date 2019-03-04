@@ -7,7 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -29,7 +28,6 @@
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
     </style>
-
     <style name="tv_title_about">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -41,7 +39,6 @@
         <item name="android:textSize">40sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-
     <style name="tv_about_common">
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_width">wrap_content</item>
@@ -52,7 +49,6 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
-
     <style name="tv_bold_20">
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
@@ -75,10 +71,79 @@
         <item name="android:textStyle">bold</item>
     </style>
     <style name="tv_value_profile">
-        <item name="android:layout_marginEnd">30dp</item>
-        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="lin_layout_vertical">
+        <item name="android:padding">10dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+    <style name="card_profile">
+        <item name="android:layout_margin">30dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="cv_profile">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">200dp</item>
+    </style>
+
+
+    <!-- LOGIN -->
+    <style name="lin_layout_pad_30">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">30dp</item>
+    </style>
+    <style name="til_normal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="chk_mg_20">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+    <style name="btn_normal_transp_center">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+
+    <!-- CADASTRO PROBLEMA -->
+    <style name="lin_layout_match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="btn_pick_location">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="cv_location">
+        <item name="android:elevation">4dp</item>
+        <item name="android:layout_margin">30dp</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

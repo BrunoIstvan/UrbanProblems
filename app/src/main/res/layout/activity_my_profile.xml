@@ -8,74 +8,45 @@
         tools:context=".views.myprofile.MyProfileActivity"
         android:orientation="vertical">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <LinearLayout style="@style/lin_layout_vertical"
+        android:padding="0dp">
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/side_nav_bar"
-                android:gravity="center_vertical|center_horizontal">
+        <LinearLayout style="@style/lin_layout_vertical"
+            android:background="@drawable/side_nav_bar">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                    app:civ_border_color="@color/colorPrimaryDark"
-                    app:civ_border_width="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/ivMyProfile"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/fpo_avatar"/>
+                android:id="@+id/ivMyProfile"
+                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_width="1dp"
+                android:src="@drawable/fpo_avatar"
+                style="@style/cv_profile" />
 
         </LinearLayout>
 
         <android.support.v7.widget.CardView
-                android:elevation="4dp"
-                android:layout_margin="30dp"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            style="@style/card_profile">
 
             <LinearLayout
-                    android:padding="10dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|center_horizontal">
+                style="@style/lin_layout_vertical">
 
-                <TextView
-                        android:text="@string/hint_name"
-                        style="@style/tv_title_profile"/>
+                <TextView android:text="@string/hint_name"
+                    style="@style/tv_title_profile"/>
+                <TextView style="@style/tv_value_profile"
+                    android:text="@string/hint_name"
+                    android:id="@+id/tvFullname"/>
 
-                <TextView
-                        style="@style/tv_value_profile"
-                        android:text="@string/hint_name"
-                        android:id="@+id/tvFullname"/>
+                <TextView android:text="@string/hint_email"
+                    style="@style/tv_title_profile"/>
+                <TextView android:text="@string/hint_email"
+                    style="@style/tv_value_profile"
+                    android:id="@+id/tvEmail"/>
 
-
-                <TextView
-                        android:text="@string/hint_email"
-                        style="@style/tv_title_profile"/>
-
-                <TextView
-                        android:text="@string/hint_email"
-                        style="@style/tv_value_profile"
-                        android:id="@+id/tvEmail"/>
-
-
-                <TextView
-                        android:text="@string/hint_date_creation"
-                        style="@style/tv_title_profile"/>
-
-                <TextView
-                        android:text="@string/hint_date_creation"
-                        android:id="@+id/tvDateRegistration"
-                        style="@style/tv_value_profile"/>
-
+                <TextView android:text="@string/hint_date_creation"
+                    style="@style/tv_title_profile"/>
+                <TextView android:text="@string/hint_date_creation"
+                    android:id="@+id/tvDateRegistration"
+                    style="@style/tv_value_profile"/>
 
             </LinearLayout>
 

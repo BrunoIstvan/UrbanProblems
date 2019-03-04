@@ -54,8 +54,7 @@
                         android:id="@+id/divider"
                         android:layout_width="match_parent"
                         android:layout_height="2px"
-                        android:background="#E1E1E1"
-                />
+                        android:background="#E1E1E1" />
 
                 <!-- DETAIL -->
                 <TextView
@@ -76,8 +75,7 @@
                         android:id="@+id/divider2"
                         android:layout_width="match_parent"
                         android:layout_height="2px"
-                        android:background="#E1E1E1"
-                />
+                        android:background="#E1E1E1" />
 
                 <!-- LOCATION -->
                 <TextView
@@ -117,11 +115,9 @@
 
                 </RelativeLayout>
 
-
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
 
     </LinearLayout>
 

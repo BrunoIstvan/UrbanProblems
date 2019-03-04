@@ -7,64 +7,42 @@
         android:layout_height="match_parent"
         tools:context=".views.signin.SignInActivity">
 
-
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:padding="30dp">
+            style="@style/lin_layout_pad_30">
 
         <android.support.design.widget.TextInputLayout
                 android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                style="@style/til_normal">
             <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/til_normal"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     android:maxLength="100"/>
-
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
                 android:id="@+id/edtPassword"
-                app:passwordToggleEnabled="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                style="@style/til_normal"
+                app:passwordToggleEnabled="true">
             <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/til_normal"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:maxLength="20"/>
-
         </android.support.design.widget.TextInputLayout>
 
         <CheckBox
-                android:layout_marginTop="20dp"
                 android:id="@+id/chkKeepConnected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/chk_mg_20"
                 android:text="Manter conectado" />
 
         <Button android:id="@+id/btnSignIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_signin"
-                android:background="@android:color/transparent"
-                android:layout_gravity="center_horizontal"/>
-
+                style="@style/btn_normal_transp_center"
+                android:text="@string/button_signin"/>
 
         <Button android:id="@+id/btnSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_go_to_signup"
-                android:background="@android:color/transparent"
-                android:layout_gravity="center_horizontal"/>
+                style="@style/btn_normal_transp_center"
+                android:text="@string/button_go_to_signup"/>
 
     </LinearLayout>
 
