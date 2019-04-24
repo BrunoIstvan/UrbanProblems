@@ -29,13 +29,13 @@
         <item name="android:layout_marginRight">0dp</item>
     </style>
     <style name="iv_icon_about">
-        <item name="android:alpha">0.2</item>
+        <item name="android:alpha">0.5</item>
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:scaleType">fitCenter</item>
-        <item name="android:src">@drawable/ic_location</item>
+        <item name="android:src">@drawable/ic_location_white</item>
         <item name="android:layout_marginBottom">150dp</item>
         <item name="android:layout_marginTop">50dp</item>
         <item name="android:layout_marginLeft">150dp</item>
