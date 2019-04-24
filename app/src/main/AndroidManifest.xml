@@ -23,7 +23,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".views.useful_telephones.UsefulTelephonesActivity"
-            android:parentActivityName="MainActivity"
+            android:parentActivityName=".views.main.MainActivity"
             android:label="@string/nav_util_telephones">
         </activity>
         <activity

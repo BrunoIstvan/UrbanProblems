@@ -18,24 +18,29 @@
 
     <TextView
             android:text="@string/title_developers"
-            android:layout_marginBottom="220dp"
+            android:layout_marginBottom="270dp"
             style="@style/tv_bold_20"/>
 
 
     <TextView
             android:text="Bruno I. C. Monteiro (RM: 331122)"
-            android:layout_marginBottom="190dp"
+            android:layout_marginBottom="240dp"
             style="@style/tv_about_common" />
 
     <TextView
             android:text="Fernando N. Silva (RM: 330161)"
             style="@style/tv_about_common"
-            android:layout_marginBottom="170dp" />
+            android:layout_marginBottom="220dp" />
 
 
     <TextView
+            android:text="Rafael Sergio Finoto Silva (RM: 330437)"
+            style="@style/tv_about_common"
+            android:layout_marginBottom="200dp" />
+
+    <TextView
             android:text="Wagner Rodrigues (RM: 331769)"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="180dp"
             style="@style/tv_about_common" />
 
     <TextView
