@@ -11,6 +11,12 @@
             android:id="@+id/ivLogo"
             style="@style/iv_bg_about"/>
 
+
+    <ImageView
+            android:id="@+id/ivLogo"
+            style="@style/iv_icon_about"/>
+
+
     <TextView
             android:id="@+id/textview"
             android:text="@string/app_name"
@@ -21,7 +27,6 @@
             android:layout_marginBottom="270dp"
             style="@style/tv_bold_20"/>
 
-
     <TextView
             android:text="Bruno I. C. Monteiro (RM: 331122)"
             android:layout_marginBottom="240dp"
@@ -31,7 +36,6 @@
             android:text="Fernando N. Silva (RM: 330161)"
             style="@style/tv_about_common"
             android:layout_marginBottom="220dp" />
-
 
     <TextView
             android:text="Rafael Sergio Finoto Silva (RM: 330437)"
