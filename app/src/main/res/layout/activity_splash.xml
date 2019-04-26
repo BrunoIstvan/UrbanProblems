@@ -8,13 +8,19 @@
         tools:context=".views.splash.SplashActivity">
 
     <ImageView
-            android:id="@+id/ivLogo"
+            android:id="@+id/ivLogoBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:scaleType="fitXY"
             android:src="@drawable/hole_street" />
+
+
+    <ImageView
+            android:id="@+id/ivLogo"
+            style="@style/iv_icon_about"/>
+
 
     <TextView
             android:id="@+id/textview"

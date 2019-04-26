@@ -13,28 +13,29 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
-    private val tempoaguardosplashscreen = 3500L
+    private val tempoaguardosplashscreen = 2000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
-        val isFirstOpen = preferences.getBoolean("open_first", true)
-
-        if (isFirstOpen) {
-            markAppAlreadyOpen(preferences)
+        //        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        //        val isFirstOpen = preferences.getBoolean("open_first", true)
+        //
+        //        if (isFirstOpen) {
+        //            markAppAlreadyOpen(preferences)
             showSplash()
-        } else {
-            showLogin()
-        }
+        //        } else {
+        //            showLogin()
+        //        }
     }
 
-    private fun markAppAlreadyOpen(preferences: SharedPreferences) {
-        val editor = preferences.edit()
-        editor.putBoolean("open_first", false)
-        editor.apply()
-    }
+    //    private fun markAppAlreadyOpen(preferences: SharedPreferences) {
+    //        val editor = preferences.edit()
+    //        editor.putBoolean("open_first", false)
+    //        editor.apply()
+    //    }
 
     private fun showLogin() {
         val nextScreen = Intent(this, SignInActivity::class.java)
