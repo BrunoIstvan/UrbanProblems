@@ -13,6 +13,14 @@
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
     </style>
 
+    <!-- Base application theme. -->
+    <style name="AppThemeNoStatusBar" parent="Theme.AppCompat.NoActionBar">
+
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 

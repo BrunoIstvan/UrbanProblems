@@ -58,6 +58,7 @@ class SignInActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE)
 
         sharedPreferences?.let { shared ->
+
             // se foi armazenado anteriormente para manter conectado...
             if(shared.getBoolean("MANTER_CONECTADO", false)) {
 
@@ -79,6 +80,7 @@ class SignInActivity : AppCompatActivity() {
 
         // configurar o click do botão para ir até a tela de cadastro
         btnSignUp.setOnClickListener {
+            hideDialog()
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
@@ -94,15 +96,15 @@ class SignInActivity : AppCompatActivity() {
 
         user?.let {
 
-            showDialog()
+            // showDialog()
             val editor = sharedPreferences.edit()
             editor.putBoolean("MANTER_CONECTADO", chkKeepConnected.isChecked)
             editor.putString("USUARIO", it.id)
             editor.apply()
 
             br.com.urbanproblems.MyApp.user = it
-            startActivity(Intent(this, MainActivity::class.java))
             hideDialog()
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
 
         }
@@ -119,7 +121,7 @@ class SignInActivity : AppCompatActivity() {
 
     private var loadingObserver = Observer<Boolean> {
         if(it == true) {
-            hideDialog()
+            //hideDialog()
             showDialog()
         } else {
             hideDialog()

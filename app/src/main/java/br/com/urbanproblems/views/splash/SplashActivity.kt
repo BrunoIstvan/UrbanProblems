@@ -1,11 +1,12 @@
 package br.com.urbanproblems.views.splash
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import br.com.urbanproblems.R
 import br.com.urbanproblems.views.signin.SignInActivity
@@ -13,11 +14,12 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
-    private val tempoaguardosplashscreen = 2000L
+    private val tempoaguardosplashscreen = 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_splash)
 
         //        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
